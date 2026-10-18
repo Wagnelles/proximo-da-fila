@@ -1,9 +1,41 @@
-/* A seção do formulário ocupa toda a largura do Grid global */
+/* Estrutura da página inicial*/
+
+
+.conteudo {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+
+    gap: 30px;
+}
+
+
+.conteudo > section {
+    width: 100%;
+    min-width: 0;
+
+    grid-column: 1;
+}
+
+
+/* Introdução */
+
+.introducao {
+    width: 100%;
+    min-width: 0;
+
+    grid-column: 1;
+
+    margin-bottom: 0;
+}
+
+
+/* Formulário */
 
 .formulario-cadastro {
     width: 100%;
+    min-width: 0;
 
-    grid-column: 1 / -1;
+    grid-column: 1;
 }
 
 
@@ -11,9 +43,13 @@
 
 .formulario-cadastro form {
     width: 100%;
+    min-width: 0;
 
     display: grid;
-    grid-template-columns: repeat(2, minmax(280px, 1fr));
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
     grid-template-rows: auto auto;
 
     gap: 30px;
@@ -59,6 +95,7 @@
 
 .formulario-cadastro fieldset p {
     width: 100%;
+    min-width: 0;
 
     margin: 20px 0;
 
@@ -79,44 +116,10 @@
 }
 
 
-/* Campos de entrada */
+/* Input, select e textarea */
 
-.formulario-cadastro input {
-    width: 100%;
-    min-width: 0;
-
-    padding: 10px;
-
-    border: 1px solid #475569;
-    border-radius: 8px;
-
-    background-color: #334155;
-    color: #f8fafc;
-
-    font-size: 11pt;
-}
-
-
-/* Campos de seleção */
-
-.formulario-cadastro select {
-    width: 100%;
-    min-width: 0;
-
-    padding: 10px;
-
-    border: 1px solid #475569;
-    border-radius: 8px;
-
-    background-color: #334155;
-    color: #f8fafc;
-
-    font-size: 11pt;
-}
-
-
-/* Áreas de texto */
-
+.formulario-cadastro input,
+.formulario-cadastro select,
 .formulario-cadastro textarea {
     width: 100%;
     min-width: 0;
@@ -133,16 +136,10 @@
 }
 
 
-/* Estados dos campos */
+/* Estados de foco */
 
-.formulario-cadastro input:focus {
-    border: 3px solid #06b6d4;
-}
-
-.formulario-cadastro select:focus {
-    border: 3px solid #06b6d4;
-}
-
+.formulario-cadastro input:focus,
+.formulario-cadastro select:focus,
 .formulario-cadastro textarea:focus {
     border: 3px solid #06b6d4;
 }
@@ -150,14 +147,17 @@
 
 /* Área dos botões */
 
+
 .formulario-cadastro form > p {
     width: 100%;
+    min-width: 0;
 
     grid-column: 1 / -1;
     grid-row: 2;
 
     display: flex;
     flex-direction: row;
+
     justify-content: center;
     align-items: center;
 
@@ -187,7 +187,7 @@
 }
 
 
-/* Estado hover dos botões */
+/* Estado hover, focus e em clique */
 
 .formulario-cadastro button:hover {
     border: 2px solid #ffffff;
@@ -199,8 +199,6 @@
 }
 
 
-/* Estado focus dos botões */
-
 .formulario-cadastro button:focus {
     border: 3px solid #06b6d4;
 
@@ -208,8 +206,6 @@
     color: #ffffff;
 }
 
-
-/* Estado durante o clique */
 
 .formulario-cadastro button:active {
     border-color: #ffffff;
@@ -222,6 +218,36 @@
 /* Responsividade */
 
 @media (max-width: 750px) {
+    .conteudo {
+        width: 94%;
+
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+
+        gap: 20px;
+    }
+
+    .conteudo > section {
+        width: 100%;
+        min-width: 0;
+
+        grid-column: 1;
+    }
+
+    .introducao {
+        width: 100%;
+        min-width: 0;
+
+        padding: 22px;
+    }
+
+    .formulario-cadastro {
+        width: 100%;
+        min-width: 0;
+
+        grid-column: 1;
+    }
+
     .formulario-cadastro form {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto;
@@ -230,7 +256,10 @@
     }
 
     .formulario-cadastro fieldset {
+        width: 100%;
         min-width: 0;
+
+        padding: 20px;
     }
 
     .formulario-cadastro form > p {
@@ -247,5 +276,25 @@
         min-width: 0;
 
         flex: 1 1 auto;
+    }
+}
+
+@media (max-width: 450px) {
+    .conteudo {
+        width: 94%;
+    }
+
+    .formulario-cadastro fieldset {
+        padding: 15px;
+    }
+
+    .formulario-cadastro legend {
+        padding: 6px 10px;
+
+        font-size: 11pt;
+    }
+
+    .formulario-cadastro fieldset p {
+        margin: 15px 0;
     }
 }

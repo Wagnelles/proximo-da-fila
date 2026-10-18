@@ -1,3 +1,32 @@
+/* Estrutura da página de consulta */
+
+.conteudo {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+
+    gap: 30px;
+}
+
+.conteudo > section {
+    width: 100%;
+    min-width: 0;
+
+    grid-column: 1;
+}
+
+
+/* Introdução */
+
+.introducao {
+    width: 100%;
+    min-width: 0;
+
+    grid-column: 1;
+
+    margin-bottom: 0;
+}
+
+
 /* Seções principais */
 
 .pesquisa,
@@ -15,7 +44,7 @@
 
     box-shadow: 0 8px 18px #020617;
 
-    grid-column: 1 / -1;
+    grid-column: 1;
 }
 
 
@@ -32,14 +61,16 @@
 }
 
 
-/* Pesquisa*/
+/* Pesquisa */
 
 .pesquisa form {
     width: 100%;
+    min-width: 0;
 }
 
 .pesquisa form p {
     width: 100%;
+    min-width: 0;
 
     display: flex;
     flex-direction: row;
@@ -58,6 +89,7 @@
 }
 
 .pesquisa input {
+    width: 100%;
     min-width: 200px;
 
     padding: 9px;
@@ -78,11 +110,12 @@
 
 .filtros form {
     width: 100%;
+    min-width: 0;
 
     display: grid;
 
     grid-template-columns:
-        repeat(4, minmax(140px, 1fr));
+        repeat(4, minmax(0, 1fr));
 
     grid-template-rows: auto auto;
 
@@ -124,7 +157,7 @@
 }
 
 
-/* Botões de aplicar e limpar */
+/* Botões Aplicar e Limpar */
 
 .filtros form p:last-child {
     grid-column: 1 / -1;
@@ -140,7 +173,7 @@
 }
 
 
-/* Botões */
+/* Demais botões*/
 
 .pesquisa button,
 .filtros button,
@@ -160,7 +193,7 @@
 }
 
 
-/* Estado hover */
+/* Estado hover, focus e ativo */
 
 .pesquisa button:hover,
 .filtros button:hover,
@@ -173,9 +206,6 @@
     box-shadow: 0 4px 10px #020617;
 }
 
-
-/* Estado focus */
-
 .pesquisa button:focus,
 .filtros button:focus,
 .acoes-obra button:focus {
@@ -184,9 +214,6 @@
     background-color: #334155;
     color: #ffffff;
 }
-
-
-/* Estado ativo */
 
 .pesquisa button:active,
 .filtros button:active,
@@ -210,7 +237,7 @@
 }
 
 
-/* Card de cada obra */
+/* Obras */
 
 .obra {
     width: 100%;
@@ -228,7 +255,7 @@
     display: grid;
 
     grid-template-columns:
-        minmax(220px, 340px) 1fr;
+        minmax(220px, 340px) minmax(0, 1fr);
 
     grid-template-rows: auto;
 
@@ -238,16 +265,12 @@
 }
 
 
-/* Estado hover do card */
-
 .obra:hover {
     border-color: #06b6d4;
 
     box-shadow: 0 8px 18px #020617;
 }
 
-
-/* Apresentação da obra */
 
 .apresentacao-obra {
     width: 100%;
@@ -281,9 +304,6 @@
     align-self: center;
 }
 
-
-/* Informações da obra */
-
 .informacoes-obra {
     width: 100%;
     min-width: 0;
@@ -291,7 +311,7 @@
     display: grid;
 
     grid-template-columns:
-        repeat(2, minmax(180px, 1fr));
+        repeat(2, minmax(0, 1fr));
 
     grid-template-rows: auto;
 
@@ -301,7 +321,7 @@
 }
 
 
-/* Título dos detalhes */
+/* Título das informações */
 
 .informacoes-obra h3 {
     grid-column: 1 / -1;
@@ -337,22 +357,14 @@
 }
 
 
-
-/* Elenco ocupa as duas colunas */
-
 .informacoes-obra p:nth-of-type(7) {
     grid-column: 1 / -1;
 }
-
-
-/* Observações ocupa as duas colunas */
 
 .informacoes-obra p:nth-of-type(8) {
     grid-column: 1 / -1;
 }
 
-
-/* Ações da obra  */
 
 .acoes-obra {
     grid-column: 1 / -1;
@@ -371,19 +383,44 @@
 }
 
 
-/* Responsividade para tablets */
+/* Responsividade */
 
 @media (max-width: 850px) {
+    .conteudo {
+        width: 94%;
+
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+        gap: 20px;
+    }
+
+    .conteudo > section {
+        width: 100%;
+        min-width: 0;
+
+        grid-column: 1;
+    }
+
+    .introducao {
+        width: 100%;
+        min-width: 0;
+
+        grid-column: 1;
+
+        padding: 22px;
+    }
+
     .filtros form {
         grid-template-columns:
-            repeat(2, minmax(150px, 1fr));
+            repeat(2, minmax(0, 1fr));
 
         grid-template-rows: auto auto auto;
     }
 
     .obra {
         grid-template-columns:
-            minmax(180px, 250px) 1fr;
+            minmax(180px, 250px) minmax(0, 1fr);
 
         gap: 25px;
     }
@@ -406,14 +443,24 @@
     }
 }
 
-
-/* Responsividade para celulares */
-
 @media (max-width: 600px) {
+    .conteudo {
+        width: 94%;
+
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+    }
+
     .pesquisa,
     .filtros,
     .lista-obras {
+        width: 100%;
+        min-width: 0;
+
         padding: 15px;
+
+        grid-column: 1;
     }
 
 
@@ -434,6 +481,7 @@
 
     .pesquisa button {
         width: 100%;
+        min-width: 0;
     }
 
 
@@ -456,12 +504,16 @@
 
     .filtros button {
         width: 100%;
+        min-width: 0;
     }
 
 
     /* Card na vertical */
 
     .obra {
+        width: 100%;
+        min-width: 0;
+
         padding: 15px;
 
         grid-template-columns: 1fr;
@@ -469,12 +521,21 @@
         gap: 22px;
     }
 
+    .apresentacao-obra {
+        width: 100%;
+        min-width: 0;
+    }
+
     .apresentacao-obra img {
         width: 80%;
         max-width: 300px;
+        min-width: 0;
     }
 
     .informacoes-obra {
+        width: 100%;
+        min-width: 0;
+
         grid-template-columns: 1fr;
 
         gap: 8px;
@@ -495,6 +556,8 @@
     }
 
     .acoes-obra button {
+        min-width: 0;
+
         flex: 1 1 120px;
     }
 }

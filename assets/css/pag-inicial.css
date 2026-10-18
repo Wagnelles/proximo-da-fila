@@ -1,8 +1,30 @@
-/* As seções da página inicial ocupam toda a largura do conteúdo */
+/* Estrutura da página inicial */
+
+
+.conteudo {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+
+    gap: 30px;
+}
 
 .conteudo > section {
     width: 100%;
-    grid-column: 1 / -1;
+    min-width: 0;
+
+    grid-column: 1;
+}
+
+
+/* Introdução */
+
+.introducao {
+    width: 100%;
+    min-width: 0;
+
+    grid-column: 1;
+
+    margin-bottom: 0;
 }
 
 
@@ -15,23 +37,26 @@
     margin: 0 auto;
 
     display: grid;
-    grid-template-columns: repeat(2, minmax(250px, 350px));
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
     grid-template-rows: auto;
 
-    justify-content: space-between;
-    align-items: stretch;
+    gap: 60px;
 
-    gap: 80px;
+    justify-items: stretch;
+    align-items: stretch;
 }
 
 
-/* Botões de Cadastro e Consulta */
+/* Botões de cadastro e consulta */
 
 .menu-principal a {
     display: flex;
 
     width: 100%;
-    min-width: 250px;
+    min-width: 0;
 
     padding: 55px 20px;
 
@@ -50,12 +75,13 @@
     animation: aparecer 1s;
 
     flex-direction: column;
+
     justify-content: center;
     align-items: center;
 }
 
 
-/* Estado hover */
+/* Estados visuais */
 
 .menu-principal a:hover {
     border: 2px solid #ffffff;
@@ -66,18 +92,12 @@
     box-shadow: 0 15px 30px #020617;
 }
 
-
-/* Estado focus */
-
 .menu-principal a:focus {
     border: 4px solid #06b6d4;
 
     background-color: #334155;
     color: #ffffff;
 }
-
-
-/* Estado ativo durante o clique */
 
 .menu-principal a:active {
     border-color: #ffffff;
@@ -92,13 +112,37 @@
 /* Responsividade */
 
 @media (max-width: 700px) {
+    .conteudo {
+        width: 94%;
+
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+
+        gap: 20px;
+    }
+
+    .conteudo > section {
+        width: 100%;
+        min-width: 0;
+
+        grid-column: 1;
+    }
+
+    .introducao {
+        width: 100%;
+        min-width: 0;
+
+        padding: 22px;
+    }
+
     .menu-principal {
-        width: 90%;
+        width: 100%;
+        max-width: 100%;
 
         grid-template-columns: 1fr;
         grid-template-rows: repeat(2, auto);
 
-        gap: 25px;
+        gap: 20px;
     }
 
     .menu-principal a {
