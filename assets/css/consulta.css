@@ -1,0 +1,500 @@
+/* Seções principais */
+
+.pesquisa,
+.filtros,
+.lista-obras {
+    width: 100%;
+    min-width: 0;
+
+    padding: 20px;
+
+    border: 1px solid #a78bfa;
+    border-radius: 18px;
+
+    background-color: #1e293b;
+
+    box-shadow: 0 8px 18px #020617;
+
+    grid-column: 1 / -1;
+}
+
+
+/* Títulos das seções */
+
+.pesquisa h2,
+.filtros h2,
+.lista-obras > h2 {
+    margin-bottom: 20px;
+
+    color: #f8fafc;
+
+    font-size: 17pt;
+}
+
+
+/* Pesquisa*/
+
+.pesquisa form {
+    width: 100%;
+}
+
+.pesquisa form p {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+.pesquisa label {
+    color: #cbd5e1;
+
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+.pesquisa input {
+    min-width: 200px;
+
+    padding: 9px;
+
+    border: 1px solid #475569;
+    border-radius: 8px;
+
+    background-color: #334155;
+    color: #f8fafc;
+
+    font-size: 11pt;
+
+    flex: 1 1 300px;
+}
+
+
+/* Filtros e ordenação */
+
+.filtros form {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(140px, 1fr));
+
+    grid-template-rows: auto auto;
+
+    gap: 15px;
+
+    align-items: end;
+}
+
+.filtros form p {
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.filtros label {
+    color: #cbd5e1;
+
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+.filtros select {
+    width: 100%;
+    min-width: 0;
+
+    padding: 9px;
+
+    border: 1px solid #475569;
+    border-radius: 8px;
+
+    background-color: #334155;
+    color: #f8fafc;
+
+    font-size: 11pt;
+}
+
+
+/* Botões de aplicar e limpar */
+
+.filtros form p:last-child {
+    grid-column: 1 / -1;
+
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+}
+
+
+/* Botões */
+
+.pesquisa button,
+.filtros button,
+.acoes-obra button {
+    min-width: 125px;
+
+    padding: 9px 16px;
+
+    border: 1px solid #a78bfa;
+    border-radius: 15px;
+
+    background-color: #334155;
+    color: #f8fafc;
+
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+
+/* Estado hover */
+
+.pesquisa button:hover,
+.filtros button:hover,
+.acoes-obra button:hover {
+    border-color: #ffffff;
+
+    background-color: #7c3aed;
+    color: #ffffff;
+
+    box-shadow: 0 4px 10px #020617;
+}
+
+
+/* Estado focus */
+
+.pesquisa button:focus,
+.filtros button:focus,
+.acoes-obra button:focus {
+    border: 3px solid #06b6d4;
+
+    background-color: #334155;
+    color: #ffffff;
+}
+
+
+/* Estado ativo */
+
+.pesquisa button:active,
+.filtros button:active,
+.acoes-obra button:active {
+    background-color: #06b6d4;
+    color: #0f172a;
+}
+
+
+/* Lista de obras */
+
+.lista-obras {
+    display: grid;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+
+    gap: 25px;
+
+    align-items: start;
+}
+
+
+/* Card de cada obra */
+
+.obra {
+    width: 100%;
+    min-width: 0;
+
+    padding: 22px;
+
+    border: 1px solid #475569;
+    border-radius: 15px;
+
+    background-color: #334155;
+
+    box-shadow: 0 5px 12px #020617;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(220px, 340px) 1fr;
+
+    grid-template-rows: auto;
+
+    gap: 35px;
+
+    align-items: start;
+}
+
+
+/* Estado hover do card */
+
+.obra:hover {
+    border-color: #06b6d4;
+
+    box-shadow: 0 8px 18px #020617;
+}
+
+
+/* Apresentação da obra */
+
+.apresentacao-obra {
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+.apresentacao-obra h3 {
+    width: 100%;
+
+    color: #f8fafc;
+
+    font-size: 16pt;
+    text-align: center;
+}
+
+.apresentacao-obra img {
+    width: 100%;
+    max-width: 340px;
+    min-width: 0;
+
+    border: 1px solid #a78bfa;
+    border-radius: 12px;
+
+    align-self: center;
+}
+
+
+/* Informações da obra */
+
+.informacoes-obra {
+    width: 100%;
+    min-width: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(180px, 1fr));
+
+    grid-template-rows: auto;
+
+    gap: 10px 30px;
+
+    align-items: start;
+}
+
+
+/* Título dos detalhes */
+
+.informacoes-obra h3 {
+    grid-column: 1 / -1;
+
+    margin-bottom: 5px;
+
+    color: #f8fafc;
+
+    font-size: 15pt;
+}
+
+
+/* Informações individuais */
+
+.informacoes-obra p {
+    width: 100%;
+    min-width: 0;
+
+    padding: 8px 0;
+
+    border-bottom: 1px solid #475569;
+
+    color: #cbd5e1;
+
+    font-size: 11pt;
+}
+
+
+/* Nome de cada informação */
+
+.informacoes-obra p strong {
+    color: #f8fafc;
+}
+
+
+
+/* Elenco ocupa as duas colunas */
+
+.informacoes-obra p:nth-of-type(7) {
+    grid-column: 1 / -1;
+}
+
+
+/* Observações ocupa as duas colunas */
+
+.informacoes-obra p:nth-of-type(8) {
+    grid-column: 1 / -1;
+}
+
+
+/* Ações da obra  */
+
+.acoes-obra {
+    grid-column: 1 / -1;
+
+    margin-top: 8px;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+
+/* Responsividade para tablets */
+
+@media (max-width: 850px) {
+    .filtros form {
+        grid-template-columns:
+            repeat(2, minmax(150px, 1fr));
+
+        grid-template-rows: auto auto auto;
+    }
+
+    .obra {
+        grid-template-columns:
+            minmax(180px, 250px) 1fr;
+
+        gap: 25px;
+    }
+
+    .apresentacao-obra img {
+        max-width: 250px;
+    }
+
+    .informacoes-obra {
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+    }
+
+    .informacoes-obra h3,
+    .informacoes-obra p:nth-of-type(7),
+    .informacoes-obra p:nth-of-type(8),
+    .acoes-obra {
+        grid-column: 1;
+    }
+}
+
+
+/* Responsividade para celulares */
+
+@media (max-width: 600px) {
+    .pesquisa,
+    .filtros,
+    .lista-obras {
+        padding: 15px;
+    }
+
+
+    /* Pesquisa na vertical */
+
+    .pesquisa form p {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .pesquisa input {
+        width: 100%;
+        min-width: 0;
+
+        flex: 1 1 auto;
+    }
+
+    .pesquisa button {
+        width: 100%;
+    }
+
+
+    /* Filtros na vertical */
+
+    .filtros form {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+        gap: 12px;
+    }
+
+    .filtros form p:last-child {
+        grid-column: 1;
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .filtros button {
+        width: 100%;
+    }
+
+
+    /* Card na vertical */
+
+    .obra {
+        padding: 15px;
+
+        grid-template-columns: 1fr;
+
+        gap: 22px;
+    }
+
+    .apresentacao-obra img {
+        width: 80%;
+        max-width: 300px;
+    }
+
+    .informacoes-obra {
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+    }
+
+    .informacoes-obra h3,
+    .informacoes-obra p:nth-of-type(7),
+    .informacoes-obra p:nth-of-type(8),
+    .acoes-obra {
+        grid-column: 1;
+    }
+
+
+    /* Botões da obra */
+
+    .acoes-obra {
+        justify-content: center;
+    }
+
+    .acoes-obra button {
+        flex: 1 1 120px;
+    }
+}

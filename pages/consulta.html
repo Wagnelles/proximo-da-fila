@@ -12,6 +12,7 @@
     <title>Consulta de obras | Próximo da fila</title>
 
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/consulta.css">
 </head>
 
 <body>
@@ -135,164 +136,146 @@
         </section>
 
         <section class="lista-obras">
-            <h2>Obras cadastradas</h2>
+    <h2>Obras cadastradas</h2>
 
-            <article class="obra">
-                <h3>Interestelar</h3>
+    <article class="obra">
+        <section class="apresentacao-obra">
+            <h3>Interestelar</h3>
 
-                <img
-                    src="../assets/img/interstellar.jpg"
-                    alt="Imagem da obra Interestellar"
-                    width="200"
-                >
-
-                <p><strong>Tipo:</strong> Filme</p>
-                <p><strong>Gênero:</strong> Ficção científica</p>
-                <p><strong>Ano de lançamento:</strong> 2014</p>
-                <p><strong>Status:</strong> Assistido</p>
-                <p><strong>Avaliação pessoal:</strong> 9</p>
-
-                <p>
-                    <a href="#detalhes-interestelar">
-                        Visualizar detalhes
-                    </a>
-                </p>
-            </article>
-
-            <article class="obra">
-                <h3>Game of thrones</h3>
-
-                <img
-                    src="../assets/img/game of thrones.png"
-                    alt="Imagem da série cadastrada"
-                    width="200"
-                >
-
-                <p><strong>Tipo:</strong> Série</p>
-                <p><strong>Gênero:</strong> Drama</p>
-                <p><strong>Ano de lançamento:</strong> 2011</p>
-                <p><strong>Status:</strong> Assistindo</p>
-                <p><strong>Avaliação pessoal:</strong> 8</p>
-
-                <p>
-                    <a href="#detalhes-serie">
-                        Visualizar detalhes
-                    </a>
-                </p>
-            </article>
+            <img
+                src="../assets/img/interstellar.jpg"
+                alt="Imagem da obra Interestelar"
+            >
         </section>
 
-        <section
-            class="detalhes-obra"
-            id="detalhes-interestelar"
-        >
-            <h2>Detalhes da obra</h2>
+        <section class="informacoes-obra">
+            <h3>Detalhes de Interestelar</h3>
 
-            <article>
-                <h3>Interestelar</h3>
+            <p><strong>Tipo:</strong> Filme</p>
 
-                <p><strong>Tipo:</strong> Filme</p>
-                <p><strong>Gênero:</strong> Ficção científica</p>
-                <p><strong>Ano de lançamento:</strong> 2014</p>
+            <p>
+                <strong>Gênero:</strong>
+                Ficção científica
+            </p>
 
-                <p>
-                    <strong>Elenco:</strong>
-                    Matthew McConaughey, Anne Hathaway e Jessica Chastain
-                </p>
+            <p>
+                <strong>Ano de lançamento:</strong>
+                2014
+            </p>
 
-                <p><strong>Avaliação geral:</strong> 8,7</p>
-                <p><strong>Status:</strong> Assistido</p>
-                <p><strong>Avaliação pessoal:</strong> 9</p>
+            <p>
+                <strong>Avaliação geral:</strong>
+                8,7
+            </p>
 
-                <p>
-                    <strong>Observações:</strong>
-                    Obra cadastrada como exemplo para a página de consulta.
-                </p>
+            <p>
+                <strong>Status:</strong>
+                Assistido
+            </p>
 
-                <p>
-                    <a href="#editar-interestelar">
-                        Editar informações pessoais
-                    </a>
-                </p>
+            <p>
+                <strong>Avaliação pessoal:</strong>
+                9
+            </p>
 
-                <p>
-                    <button type="button">Excluir obra</button>
-                </p>
-            </article>
+            <p>
+                <strong>Elenco:</strong>
+                Matthew McConaughey, Anne Hathaway e Jessica Chastain
+            </p>
+
+            <p>
+                <strong>Observações:</strong>
+                Obra cadastrada como exemplo para a página de consulta.
+            </p>
+
+            <section class="acoes-obra">
+                <button type="button">Editar</button>
+                <button type="button">Excluir obra</button>
+            </section>
+        </section>
+    </article>
+
+    <article class="obra">
+        <section class="apresentacao-obra">
+            <h3>Game of Thrones</h3>
+
+            <img
+                src="../assets/img/game of thrones.png"
+                alt="Imagem da obra Game of Thrones"
+            >
         </section>
 
-        <section
-            class="edicao-obra"
-            id="editar-interestelar"
-        >
-            <h2>Editar informações pessoais</h2>
+        <section class="informacoes-obra">
+            <h3>Detalhes de Game of Thrones</h3>
 
-            <form>
-                <p>
-                    <label for="editar-status">Status:</label>
+            <p><strong>Tipo:</strong> Série</p>
 
-                    <select id="editar-status" name="status">
-                        <option value="quero-assistir">
-                            Quero assistir
-                        </option>
+            <p>
+                <strong>Gênero:</strong>
+                Drama
+            </p>
 
-                        <option value="assistindo">
-                            Assistindo
-                        </option>
+            <p>
+                <strong>Ano de lançamento:</strong>
+                2011
+            </p>
 
-                        <option value="assistido" selected>
-                            Assistido
-                        </option>
-                    </select>
-                </p>
+            <p>
+                <strong>Avaliação geral:</strong>
+                9,2
+            </p>
 
-                <p>
-                    <label for="editar-avaliacao">
-                        Avaliação pessoal:
-                    </label>
+            <p>
+                <strong>Status:</strong>
+                Assistindo
+            </p>
 
-                    <input
-                        type="number"
-                        id="editar-avaliacao"
-                        name="avaliacao-pessoal"
-                        min="0"
-                        max="10"
-                        step="0.1"
-                        value="9"
-                    >
-                </p>
+            <p>
+                <strong>Avaliação pessoal:</strong>
+                8
+            </p>
 
-                <p>
-                    <label for="editar-observacoes">
-                        Observações:
-                    </label>
+            <p>
+                <strong>Elenco:</strong>
+                Elenco principal da série
+            </p>
 
-                    <textarea
-                        id="editar-observacoes"
-                        name="observacoes">
-                    </textarea>
-       </section>
+            <p>
+                <strong>Observações:</strong>
+                Série cadastrada como exemplo para a página de consulta.
+            </p>
+
+            <section class="acoes-obra">
+                <button type="button">Editar</button>
+                <button type="button">Excluir obra</button>
+            </section>
+        </section>
+    </article>
+</section>
 
     </main>
 
-<footer class="rodape">
+    <footer class="rodape">
+        <section class="signature">
+            <p>PUC Minas - SWE</p>
+            <p>Wagnelles@2026</p>
+        </section>
 
-    <section class="signature">
-    <p>PUC Minas - SWE</p>
-    <p>Wagnelles@2026</p>
-    </section>
+        <nav class="navegacao">
+            <a
+                class="a1"
+                href="https://github.com/Wagnelles/proximo-da-fila"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                GitHub
+            </a>
 
-    <nav class="navegacao">
-        <a class="a1" href="https://github.com/Wagnelles/proximo-da-fila">
-                Github
-        </a>
-
-        <a class="a2"> Made on Arch Linux (btw)</a>
-
-    </nav>
-
-
-</footer>
+            <a class="a2">
+                Made on Arch Linux (btw)
+            </a>
+        </nav>
+    </footer>
 
 </body>
 

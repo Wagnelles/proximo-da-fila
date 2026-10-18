@@ -1,20 +1,41 @@
-.menu-principal {
-    width: 100%;
+/* As seções da página inicial ocupam toda a largura do conteúdo */
 
-    text-align: center;
+.conteudo > section {
+    width: 100%;
+    grid-column: 1 / -1;
 }
 
-/* Os links de Cadastro e Consulta funcionam como cards */
+
+/* Menu principal */
+
+.menu-principal {
+    width: 100%;
+    max-width: 800px;
+
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 350px));
+    grid-template-rows: auto;
+
+    justify-content: space-between;
+    align-items: stretch;
+
+    gap: 80px;
+}
+
+
+/* Botões de Cadastro e Consulta */
+
 .menu-principal a {
-    display: inline-block;
+    display: flex;
 
-    width: 40%;
-    max-width: 350px;
+    width: 100%;
+    min-width: 250px;
 
-    margin: 15px;
     padding: 55px 20px;
 
-    border: 1px solid #475569;
+    border: 1px solid #a78bfa;
     border-radius: 18px;
 
     background-color: #1e293b;
@@ -27,18 +48,15 @@
     text-align: center;
 
     animation: aparecer 1s;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Estado normal diferente para cada card */
-.menu-principal a:nth-child(1) {
-    border-color: #a78bfa;
-}
-
-.menu-principal a:nth-child(2) {
-    border-color: #a78bfa;
-}
 
 /* Estado hover */
+
 .menu-principal a:hover {
     border: 2px solid #ffffff;
 
@@ -48,7 +66,9 @@
     box-shadow: 0 15px 30px #020617;
 }
 
+
 /* Estado focus */
+
 .menu-principal a:focus {
     border: 4px solid #06b6d4;
 
@@ -56,7 +76,9 @@
     color: #ffffff;
 }
 
-/* Estado ativo, durante o clique */
+
+/* Estado ativo durante o clique */
+
 .menu-principal a:active {
     border-color: #ffffff;
 
@@ -67,4 +89,22 @@
 }
 
 
+/* Responsividade */
 
+@media (max-width: 700px) {
+    .menu-principal {
+        width: 90%;
+
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, auto);
+
+        gap: 25px;
+    }
+
+    .menu-principal a {
+        width: 100%;
+        min-width: 0;
+
+        padding: 40px 15px;
+    }
+}

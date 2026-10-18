@@ -1,4 +1,4 @@
-/* Config geral */
+/* Configuração geral */
 
 * {
     box-sizing: border-box;
@@ -6,7 +6,8 @@
     padding: 0;
 }
 
-/* Seletor de elemento */
+/* Estrutura geral com Grid */
+
 body {
     width: 100%;
 
@@ -14,11 +15,24 @@ body {
     color: #f8fafc;
 
     line-height: 1.6;
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+
+    grid-template-areas:
+        "cabecalho"
+        "conteudo"
+        "rodape";
 }
+
 
 /* Cabeçalho */
 
 .cabecalho {
+    grid-area: cabecalho;
+
     width: 100%;
     padding: 45px 25px;
 
@@ -30,6 +44,13 @@ body {
     text-align: center;
 
     box-shadow: 0 8px 20px #020617;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
 }
 
 .titulo {
@@ -55,11 +76,26 @@ body {
 /* Conteúdo */
 
 .conteudo {
+    grid-area: conteudo;
+
     width: 90%;
     max-width: 960px;
 
     margin: 45px auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+    grid-template-rows: auto;
+
+    gap: 25px;
+
+    justify-items: stretch;
+    align-items: start;
 }
+
 
 /* Introdução */
 
@@ -69,6 +105,8 @@ body {
     margin-bottom: 30px;
     padding: 30px;
 
+    font-weight: 500;
+
     border: 1px solid #a78bfa;
     border-radius: 18px;
 
@@ -77,6 +115,11 @@ body {
     box-shadow: 0 10px 25px #020617;
 
     animation: aparecer 1s;
+
+    grid-column: 1 / -1;
+    grid-row: auto;
+
+    align-self: start;
 }
 
 .introducao:hover {
@@ -87,21 +130,29 @@ body {
     box-shadow: 0 14px 28px #020617;
 }
 
-/* Seletores descendentes */
 .introducao article {
     padding: 10px;
 }
 
-.introducao li {
+.introducao {
     color: #cbd5e1;
 
     font-size: 13pt;
 }
 
 
+/* Seções dentro do conteúdo */
+
+.conteudo section {
+    min-width: 0;
+}
+
+
 /* Rodapé */
 
 .rodape {
+    grid-area: rodape;
+
     width: 100%;
 
     margin-top: 40px;
@@ -115,18 +166,41 @@ body {
     text-align: center;
 
     box-shadow: 0 0 20px #020617;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
 }
 
 .navegacao {
     width: 100%;
-    max-width: 500px;
+
 
     margin: 0 auto;
     padding: 10px;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
 }
 
 .navegacao a {
     display: inline-block;
+
+    min-width: 90px;
+    max-width: 300px;
 
     margin-top: 5px;
     padding: 7px 14px;
@@ -139,30 +213,30 @@ body {
 
     font-size: 10pt;
     font-weight: bold;
+
+    text-align: center;
+
+    flex: 1 1 90px;
 }
 
-/* Estado visual durante o clique */
 .a1:active {
     background-color: #bd9bf9;
     color: #0f172a;
 }
 
 .a1:hover {
-    
     background-color: #7c3aed;
     color: #ffffff;
 
     box-shadow: 0 5px 15px #020617;
 }
 
-/* Estado visual ao selecionar com o teclado */
 .a1:focus {
     border: 3px solid #06b6d4;
 
     background-color: #334155;
     color: #ffffff;
 }
-
 
 .a2 {
     display: inline-block;
@@ -177,12 +251,16 @@ body {
     color: #67e8f9;
 
     font-size: 10pt;
+
+    align-self: center;
 }
 
 .a2:hover {
     border: 1px solid #06b6d4;
+
     background-color: #334155;
     color: #ffffff;
+
     box-shadow: 0 5px 15px #020617;
 }
 
@@ -193,7 +271,17 @@ body {
     color: #ffffff;
 }
 
+.signature {
+    display: flex;
+    flex-direction: row;
 
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+}
 
 .signature p {
     margin: 5px;
@@ -205,7 +293,7 @@ body {
 }
 
 
-
+/* Animação */
 
 @keyframes aparecer {
     from {
@@ -214,5 +302,39 @@ body {
 
     to {
         opacity: 1;
+    }
+}
+
+
+/* Responsividade */
+
+@media (max-width: 700px) {
+    .conteudo {
+        width: 9%;
+
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+    .cabecalho {
+        padding: 30px 15px;
+    }
+
+    .navegacao {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .navegacao a {
+        width: 100%;
+
+        flex: 1 1 auto;
+    }
+
+    .signature {
+        flex-direction: column;
+
+        gap: 5px;
     }
 }
