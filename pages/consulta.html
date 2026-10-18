@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Consulta de obras | Próximo da fila</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <h1 class="titulo">Próximo da fila</h1>
+
+        <p class="subtitulo">
+            Descubra o que assistir em seguida!
+        </p>
+
+        <nav class="navegacao">
+            <a href="inicial.html">Início</a>
+            <a href="cadastro.html">Cadastro</a>
+            <a href="consulta.html">Consulta</a>
+        </nav>
+    </header>
+
+    <main class="conteudo">
+
+        <section class="introducao">
+            <h2>Minha coleção</h2>
+
+            <p>
+                Pesquise, organize e consulte as obras audiovisuais
+                cadastradas na sua coleção.
+            </p>
+        </section>
+
+        <section class="pesquisa">
+            <h2>Pesquisar</h2>
+
+            <form>
+                <p>
+                    <label for="pesquisa">Título da obra:</label>
+
+                    <input
+                        type="search"
+                        id="pesquisa"
+                        name="pesquisa"
+                        placeholder="Digite o título da obra"
+                    >
+
+                    <button type="submit">Pesquisar</button>
+                </p>
+            </form>
+        </section>
+
+        <section class="filtros">
+            <h2>Filtrar e ordenar</h2>
+
+            <form>
+                <p>
+                    <label for="filtro-genero">Gênero:</label>
+
+                    <select id="filtro-genero" name="genero">
+                        <option value="">Todos os gêneros</option>
+                        <option value="acao">Ação</option>
+                        <option value="animacao">Animação</option>
+                        <option value="aventura">Aventura</option>
+                        <option value="comedia">Comédia</option>
+                        <option value="documentario">Documentário</option>
+                        <option value="drama">Drama</option>
+                        <option value="ficcao-cientifica">
+                            Ficção científica
+                        </option>
+                        <option value="romance">Romance</option>
+                        <option value="suspense">Suspense</option>
+                        <option value="terror">Terror</option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="filtro-tipo">Tipo:</label>
+
+                    <select id="filtro-tipo" name="tipo">
+                        <option value="">Todos os tipos</option>
+                        <option value="filme">Filme</option>
+                        <option value="serie">Série</option>
+                        <option value="documentario">Documentário</option>
+                        <option value="animacao">Animação</option>
+                        <option value="curta-metragem">
+                            Curta-metragem
+                        </option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="filtro-status">Status:</label>
+
+                    <select id="filtro-status" name="status">
+                        <option value="">Todos os status</option>
+                        <option value="quero-assistir">
+                            Quero assistir
+                        </option>
+                        <option value="assistindo">
+                            Assistindo
+                        </option>
+                        <option value="assistido">
+                            Assistido
+                        </option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="ordenacao">Ordenar por:</label>
+
+                    <select id="ordenacao" name="ordenacao">
+                        <option value="titulo">Título</option>
+                        <option value="ano">Ano de lançamento</option>
+                        <option value="avaliacao">Avaliação</option>
+                    </select>
+                </p>
+
+                <p>
+                    <button type="submit">Aplicar</button>
+                    <button type="reset">Limpar</button>
+                </p>
+            </form>
+        </section>
+
+        <section class="lista-obras">
+            <h2>Obras cadastradas</h2>
+
+            <article class="obra">
+                <h3>Interestelar</h3>
+
+                <img
+                    src="../assets/img/interestelar.jpg"
+                    alt="Imagem da obra Interestelar"
+                    width="200"
+                >
+
+                <p><strong>Tipo:</strong> Filme</p>
+                <p><strong>Gênero:</strong> Ficção científica</p>
+                <p><strong>Ano de lançamento:</strong> 2014</p>
+                <p><strong>Status:</strong> Assistido</p>
+                <p><strong>Avaliação pessoal:</strong> 9</p>
+
+                <p>
+                    <a href="#detalhes-interestelar">
+                        Visualizar detalhes
+                    </a>
+                </p>
+            </article>
+
+            <article class="obra">
+                <h3>Exemplo de série</h3>
+
+                <img
+                    src="../assets/img/exemplo-serie.jpg"
+                    alt="Imagem da série cadastrada"
+                    width="200"
+                >
+
+                <p><strong>Tipo:</strong> Série</p>
+                <p><strong>Gênero:</strong> Drama</p>
+                <p><strong>Ano de lançamento:</strong> 2020</p>
+                <p><strong>Status:</strong> Assistindo</p>
+                <p><strong>Avaliação pessoal:</strong> 8</p>
+
+                <p>
+                    <a href="#detalhes-serie">
+                        Visualizar detalhes
+                    </a>
+                </p>
+            </article>
+        </section>
+
+        <section
+            class="detalhes-obra"
+            id="detalhes-interestelar"
+        >
+            <h2>Detalhes da obra</h2>
+
+            <article>
+                <h3>Interestelar</h3>
+
+                <p><strong>Tipo:</strong> Filme</p>
+                <p><strong>Gênero:</strong> Ficção científica</p>
+                <p><strong>Ano de lançamento:</strong> 2014</p>
+
+                <p>
+                    <strong>Elenco:</strong>
+                    Matthew McConaughey, Anne Hathaway e Jessica Chastain
+                </p>
+
+                <p><strong>Avaliação geral:</strong> 8,7</p>
+                <p><strong>Status:</strong> Assistido</p>
+                <p><strong>Avaliação pessoal:</strong> 9</p>
+
+                <p>
+                    <strong>Observações:</strong>
+                    Obra cadastrada como exemplo para a página de consulta.
+                </p>
+
+                <p>
+                    <a href="#editar-interestelar">
+                        Editar informações pessoais
+                    </a>
+                </p>
+
+                <p>
+                    <button type="button">Excluir obra</button>
+                </p>
+            </article>
+        </section>
+
+        <section
+            class="edicao-obra"
+            id="editar-interestelar"
+        >
+            <h2>Editar informações pessoais</h2>
+
+            <form>
+                <p>
+                    <label for="editar-status">Status:</label>
+
+                    <select id="editar-status" name="status">
+                        <option value="quero-assistir">
+                            Quero assistir
+                        </option>
+
+                        <option value="assistindo">
+                            Assistindo
+                        </option>
+
+                        <option value="assistido" selected>
+                            Assistido
+                        </option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="editar-avaliacao">
+                        Avaliação pessoal:
+                    </label>
+
+                    <input
+                        type="number"
+                        id="editar-avaliacao"
+                        name="avaliacao-pessoal"
+                        min="0"
+                        max="10"
+                        step="0.1"
+                        value="9"
+                    >
+                </p>
+
+                <p>
+                    <label for="editar-observacoes">
+                        Observações:
+                    </label>
+
+                    <textarea
+                        id="editar-observacoes"
+                        name="observacoes">
+                    </textarea>
+       </section>
+
+    </main>
+
+<footer class="rodape">
+
+    <section class="signature">
+    <p>PUC Minas - SWE</p>
+    <p>Wagnelles@2026</p>
+    </section>
+
+    <nav class="navegacao">
+        <a href="https://github.com/Wagnelles/proximo-da-fila">
+                Github
+        </a>
+
+    <section class="btw">
+        Made on Arch Linux (btw)
+    </section>
+
+
+</footer>
+
+</body>
+
+</html>
