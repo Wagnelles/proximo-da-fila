@@ -1,6 +1,4 @@
-/* =========================================================
-   CONFIGURACAO GERAL
-   ========================================================= */
+/* Config geral */
 
 * {
     box-sizing: border-box;
@@ -18,9 +16,7 @@ body {
     line-height: 1.6;
 }
 
-/* =========================================================
-   CABECALHO
-   ========================================================= */
+/* Cabeçalho */
 
 .cabecalho {
     width: 100%;
@@ -55,62 +51,8 @@ body {
     font-size: 14pt;
 }
 
-/* =========================================================
-   NAVEGACAO SUPERIOR
-   ========================================================= */
 
-.navegacao {
-    width: 100%;
-    max-width: 500px;
-
-    margin: 0 auto;
-    padding: 10px;
-}
-
-/* Seletor descendente */
-.navegacao a {
-    display: inline-block;
-
-    margin-top: 5px;
-    padding: 7px 14px;
-
-    border: 1px solid #a78bfa;
-    border-radius: 18px;
-
-    background-color: #334155;
-    color: #f8fafc;
-
-    font-size: 10pt;
-    font-weight: bold;
-}
-
-/* Estado visual ao passar o mouse */
-.navegacao a:hover {
-    border-color: #06b6d4;
-
-    background-color: #7c3aed;
-    color: #ffffff;
-
-    box-shadow: 0 5px 15px #020617;
-}
-
-/* Estado visual ao selecionar com o teclado */
-.navegacao a:focus {
-    border: 3px solid #06b6d4;
-
-    background-color: #334155;
-    color: #ffffff;
-}
-
-/* Estado visual durante o clique */
-.navegacao a:active {
-    background-color: #06b6d4;
-    color: #0f172a;
-}
-
-/* =========================================================
-   CONTEUDO PRINCIPAL
-   ========================================================= */
+/* Conteúdo */
 
 .conteudo {
     width: 90%;
@@ -119,9 +61,7 @@ body {
     margin: 45px auto;
 }
 
-/* =========================================================
-   CARD DE INTRODUCAO
-   ========================================================= */
+/* Introdução */
 
 .introducao {
     width: 100%;
@@ -158,115 +98,8 @@ body {
     font-size: 13pt;
 }
 
-/* =========================================================
-   MENU PRINCIPAL
-   ========================================================= */
 
-.menu-principal {
-    width: 100%;
-
-    text-align: center;
-}
-
-/* Os links de Cadastro e Consulta funcionam como cards */
-.menu-principal a {
-    display: inline-block;
-
-    width: 40%;
-    max-width: 350px;
-
-    margin: 15px;
-    padding: 55px 20px;
-
-    border: 1px solid #475569;
-    border-radius: 18px;
-
-    background-color: #1e293b;
-    color: #f8fafc;
-
-    box-shadow: 0 10px 25px #020617;
-
-    font-size: 17pt;
-    font-weight: bold;
-    text-align: center;
-
-    animation: aparecer 1s;
-}
-
-/* Estado normal diferente para cada card */
-.menu-principal a:nth-child(1) {
-    border-color: #a78bfa;
-}
-
-.menu-principal a:nth-child(2) {
-    border-color: #06b6d4;
-}
-
-/* Estado hover */
-.menu-principal a:hover {
-    border: 2px solid #ffffff;
-
-    background-color: #7c3aed;
-    color: #ffffff;
-
-    box-shadow: 0 15px 30px #020617;
-}
-
-/* Estado focus */
-.menu-principal a:focus {
-    border: 4px solid #06b6d4;
-
-    background-color: #334155;
-    color: #ffffff;
-}
-
-/* Estado ativo, durante o clique */
-.menu-principal a:active {
-    border-color: #ffffff;
-
-    background-color: #06b6d4;
-    color: #0f172a;
-
-    box-shadow: 0 5px 10px #020617;
-}
-
-/* =========================================================
-   BADGES
-   ========================================================= */
-
-/*
-   Estas classes podem ser usadas em elementos span no HTML.
-*/
-
-.badge {
-    display: inline-block;
-
-    width: 85px;
-
-    margin: 12px 5px 0;
-    padding: 5px;
-
-    border: 1px solid #a78bfa;
-    border-radius: 15px;
-
-    background-color: #7c3aed;
-    color: #ffffff;
-
-    font-size: 9pt;
-    font-weight: bold;
-    text-align: center;
-}
-
-.badge:hover {
-    border-color: #ffffff;
-
-    background-color: #06b6d4;
-    color: #0f172a;
-}
-
-/* =========================================================
-   RODAPE
-   ========================================================= */
+/* Rodapé */
 
 .rodape {
     width: 100%;
@@ -284,17 +117,54 @@ body {
     box-shadow: 0 0 20px #020617;
 }
 
-/* Seletor descendente */
-.signature p {
-    margin: 5px;
+.navegacao {
+    width: 100%;
+    max-width: 500px;
 
-    color: #cbd5e1;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.navegacao a {
+    display: inline-block;
+
+    margin-top: 5px;
+    padding: 7px 14px;
+
+    border: 1px solid #a78bfa;
+    border-radius: 18px;
+
+    background-color: #334155;
+    color: #f8fafc;
 
     font-size: 10pt;
     font-weight: bold;
 }
 
-.btw {
+/* Estado visual durante o clique */
+.a1:active {
+    background-color: #bd9bf9;
+    color: #0f172a;
+}
+
+.a1:hover {
+    
+    background-color: #7c3aed;
+    color: #ffffff;
+
+    box-shadow: 0 5px 15px #020617;
+}
+
+/* Estado visual ao selecionar com o teclado */
+.a1:focus {
+    border: 3px solid #06b6d4;
+
+    background-color: #334155;
+    color: #ffffff;
+}
+
+
+.a2 {
     display: inline-block;
 
     margin-top: 15px;
@@ -309,16 +179,33 @@ body {
     font-size: 10pt;
 }
 
-.btw:hover {
-    border-color: #a78bfa;
+.a2:hover {
+    border: 1px solid #06b6d4;
+    background-color: #334155;
+    color: #ffffff;
+    box-shadow: 0 5px 15px #020617;
+}
+
+.a2:focus {
+    border: 3px solid #06b6d4;
 
     background-color: #334155;
     color: #ffffff;
 }
 
-/* =========================================================
-   ANIMACAO
-   ========================================================= */
+
+
+.signature p {
+    margin: 5px;
+
+    color: #cbd5e1;
+
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+
+
 
 @keyframes aparecer {
     from {
