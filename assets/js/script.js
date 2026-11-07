@@ -1,0 +1,86 @@
+const lista = JSON.parse(localStorage.getItem("obras")) || []
+let id = lista.length
+
+Create()
+Read()
+//Update() - ainda a fazer
+//Delete() - ainda a fazer
+
+function Create() {
+    const corpocadastro = document.querySelector("#corpo-cadastro")
+
+    if (corpocadastro === null) {return}
+
+    //eventlistener
+    corpocadastro.addEventListener("submit", function (event) {
+    event.preventDefault()
+
+    //Selecionando os inputs/campos de digitação
+    const titulo = document.querySelector("#input-titulo").value
+    const tipo = document.querySelector("#input-tipo-da-midia").value
+    const generos = document.querySelector("#input-genero").value
+    const anolancamento = document.querySelector("#input-ano-lancamento").value
+    const elenco = document.querySelector("#input-elenco").value
+    const avaliacaogeral = document.querySelector("#input-avaliacao-geral").value
+    const infopessoal_status = document.querySelector("#input-infopessoal-status").value
+    const infopessoal_nota = document.querySelector("#input-infopessoal-avaliacao-pessoal").value
+    const infopessoal_observacoes = document.querySelector("#input-infopessoal-observacoes").value
+
+    id+=1
+    const dicionario = {
+        id: id,
+        titulo: titulo,
+        tipo: tipo,
+        genero: generos,
+        anolancamento: anolancamento,
+        elenco: elenco,
+        avaliacaogeral: avaliacaogeral,
+        status: infopessoal_status,
+        notapessoal: infopessoal_nota,
+        observacoes: infopessoal_observacoes
+    }
+
+    lista.push(dicionario)
+    localStorage.setItem("obras", JSON.stringify(lista))
+    console.log(lista)
+
+    })
+
+}
+
+function Read() {
+    const corpopagconsulta = document.querySelector("#lista-obras")
+    if (corpopagconsulta === null) {return}
+    corpopagconsulta.innerHTML = ""
+
+    lista.forEach(function(i) {
+        corpopagconsulta.innerHTML += `
+        <article class="obra" data-id="${i.id}">
+            <section class = "apresentacao-obra">
+                <h3>${i.titulo}</h3>
+            </section>
+        
+
+            <section class="informacoes-obra">
+                <h3>Detalhes de ${i.titulo}</h3>
+                <p><strong>Tipo:</strong> ${i.tipo}</p>
+                <p><strong>Gênero:</strong> ${i.genero}</p>
+                <p><strong>Ano de lançamento:</strong> ${i.anolancamento}</p>
+                <p><strong>Nota Geral:</strong> ${i.avaliacaogeral}</p>
+                <p><strong>Status:</strong> ${i.status}</p>
+                <p><strong>Nota Pessoal:</strong> ${i.notapessoal}</p>
+                <p><strong>Elenco:</strong> ${i.elenco}</p>
+                <p><strong>Observações:</strong> ${i.observacoes}</p>
+                
+                <section class="acoes-obra">
+                    <button class="botao-editar" type="button" data-id="${i.id}">Editar</button>
+                    <button class="botao-excluir" type="button" data-id="${i.id}">Excluir</button>
+                </section>
+            </section>
+        </article>
+        `
+    })
+}
+
+//function Update() - ainda a fazer
+//function Delete() - ainda a fazer
