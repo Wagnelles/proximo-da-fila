@@ -52,17 +52,16 @@
                     <legend>Informações da obra</legend>
 
                     <p>
-                        <label for="titulo">Título:</label>
+                        <label for="input-titulo">Título:</label>
 
                         <input id="input-titulo"
                             type="text"
-                            id="titulo"
                             name="titulo"
                         >
                     </p>
 
                     <p>
-                        <label for="tipo">Tipo:</label>
+                        <label for="input-tipo-da-midia">Tipo:</label>
 
                         <select id="input-tipo-da-midia" name="tipo">
                             <option value="">Selecione um tipo</option>
@@ -76,24 +75,30 @@
                     </p>
 
                     <p>
-                        <label for="generos">Gênero(s):</label>
+                        <label for="input-genero">Gênero:</label>
 
-                        <input id="input-genero"
-                            type="text"
-                            id="generos"
-                            name="generos"
-                            placeholder="Exemplo: ação, aventura, comédia"
-                        >
+                        <select id="input-genero" name="genero" required>
+                            <option value="">Selecione o gênero</option>
+                            <option value="acao">Ação</option>
+                            <option value="animacao">Animação</option>
+                            <option value="aventura">Aventura</option>
+                            <option value="comedia">Comédia</option>
+                            <option value="documentario">Documentário</option>
+                            <option value="drama">Drama</option>
+                            <option value="ficcao-cientifica">Ficção científica</option>
+                            <option value="romance">Romance</option>
+                            <option value="suspense">Suspense</option>
+                            <option value="terror">Terror</option>
+                        </select>
                     </p>
 
                     <p>
-                        <label for="ano-lancamento">
+                        <label for="input-ano-lancamento">
                             Ano de lançamento:
                         </label>
 
                         <input id="input-ano-lancamento"
                             type="number"
-                            id="ano-lancamento"
                             name="ano-lancamento"
                             min="1888"
                             max="2100"
@@ -101,7 +106,7 @@
                     </p>
 
                     <p>
-                        <label for="elenco">Elenco:</label>
+                        <label for="input-elenco">Elenco:</label>
 
                         <textarea
                             id="input-elenco"
@@ -112,7 +117,7 @@
                     </p>
 
                     <p>
-                        <label for="avaliacao-geral">
+                        <label for="input-avaliacao-geral">
                             Avaliação geral:
                         </label>
 
@@ -127,7 +132,7 @@
                     </p>
 
                     <p>
-                        <label for="imagem">Imagem:</label>
+                        <label for="input-imagem">Imagem:</label>
 
                         <input
                             type="file"
@@ -142,7 +147,7 @@
                     <legend>Informações pessoais</legend>
 
                     <p>
-                        <label for="status">Status:</label>
+                        <label for="input-infopessoal-status">Status:</label>
 
                         <select id="input-infopessoal-status" name="status">
                             <option value="">Selecione um status</option>
@@ -159,7 +164,7 @@
                     </p>
 
                     <p>
-                        <label for="avaliacao-pessoal">
+                        <label for="input-infopessoal-avaliacao-pessoal">
                             Nota pessoal:
                         </label>
 
@@ -174,7 +179,7 @@
                     </p>
 
                     <p>
-                        <label for="observacoes">Observações:</label>
+                        <label for="input-infopessoal-observacoes">Observações:</label>
 
                         <textarea
                             id="input-infopessoal-observacoes"

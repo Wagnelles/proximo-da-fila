@@ -7,136 +7,141 @@ lista.forEach(function (obra) {
     }
 })
 
+//CRUD
 Create()
 Read()
 Update()
 Delete()
 
+// Funções de pesquisa, filtragem e ordenação
+Pesquisa()
+Filtragem_Ordenacao()
+
+
 function Create() {
     const corpocadastro = document.querySelector("#corpo-cadastro")
 
-    if (corpocadastro === null) {return}
-
-    //eventlistener
-    corpocadastro.addEventListener("submit", function (event) {
-    event.preventDefault()
-
-    //Selecionando os inputs/campos de digitação
-    const titulo = document.querySelector("#input-titulo").value
-    const tipo = document.querySelector("#input-tipo-da-midia").value
-    const generos = document.querySelector("#input-genero").value
-    const anolancamento = document.querySelector("#input-ano-lancamento").value
-    const elenco = document.querySelector("#input-elenco").value
-    const avaliacaogeral = document.querySelector("#input-avaliacao-geral").value
-    const infopessoal_status = document.querySelector("#input-infopessoal-status").value
-    const infopessoal_nota = document.querySelector("#input-infopessoal-avaliacao-pessoal").value
-    const infopessoal_observacoes = document.querySelector("#input-infopessoal-observacoes").value
-    const alertas = document.querySelector("#alertas")
-
-    const dadosvalidos = validador(
-        titulo,
-        tipo,
-        generos,
-        anolancamento,
-        alertas
-    )
-
-    if (dadosvalidos === false){
+    if (corpocadastro === null) {
         return
     }
 
-    //dependência de edição
+    corpocadastro.addEventListener("submit", function (event) {
+        event.preventDefault()
 
-    const parametros = new URLSearchParams(window.location.search)
-    const idEdicao = Number(parametros.get("editar"))
+        // Selecionando os inputs/campos de digitação
+        const titulo = document.querySelector("#input-titulo").value
+        const tipo = document.querySelector("#input-tipo-da-midia").value
+        const generos = document.querySelector("#input-genero").value
+        const anolancamento = document.querySelector("#input-ano-lancamento").value
+        const elenco = document.querySelector("#input-elenco").value
+        const avaliacaogeral = document.querySelector("#input-avaliacao-geral").value
+        const infopessoal_status = document.querySelector("#input-infopessoal-status").value
+        const infopessoal_nota = document.querySelector("#input-infopessoal-avaliacao-pessoal").value
+        const infopessoal_observacoes = document.querySelector("#input-infopessoal-observacoes").value
+        const alertas = document.querySelector("#alertas")
 
-    if (idEdicao > 0) {
-        const obraSelecionada = lista.find(function (obra) {
-        return obra.id === idEdicao
-    })
-
-    if (obraSelecionada !== undefined) {
-        obraSelecionada.titulo = titulo
-        obraSelecionada.tipo = tipo
-        obraSelecionada.genero = generos
-        obraSelecionada.anolancamento = anolancamento
-        obraSelecionada.elenco = elenco
-        obraSelecionada.avaliacaogeral = avaliacaogeral
-        obraSelecionada.status = infopessoal_status
-        obraSelecionada.notapessoal = infopessoal_nota
-        obraSelecionada.observacoes = infopessoal_observacoes
-
-        localStorage.setItem(
-            "obras",
-            JSON.stringify(lista)
+        const dadosvalidos = validador(
+            titulo,
+            tipo,
+            generos,
+            anolancamento,
+            alertas
         )
 
-        window.location.href = "consulta.html"
+        if (dadosvalidos === false) {
+            return
+        }
 
-        return
-    }
-}
+        // Dependência de edição
+        const parametros = new URLSearchParams(window.location.search)
+        const idEdicao = Number(parametros.get("editar"))
 
-    //função validador
+        if (idEdicao > 0) {
+            const obraSelecionada = lista.find(function (obra) {
+                return obra.id === idEdicao
+            })
+
+            if (obraSelecionada !== undefined) {
+                obraSelecionada.titulo = titulo
+                obraSelecionada.tipo = tipo
+                obraSelecionada.genero = generos
+                obraSelecionada.anolancamento = anolancamento
+                obraSelecionada.elenco = elenco
+                obraSelecionada.avaliacaogeral = avaliacaogeral
+                obraSelecionada.status = infopessoal_status
+                obraSelecionada.notapessoal = infopessoal_nota
+                obraSelecionada.observacoes = infopessoal_observacoes
+
+                localStorage.setItem(
+                    "obras",
+                    JSON.stringify(lista)
+                )
+
+                window.location.href = "consulta.html"
+                return
+            }
+        }
+
         function validador(titulo, tipo, genero, anolancamento, alertas) {
             if (titulo === "") {
                 alertas.textContent = "Digite um título"
                 return false
-            } else if (titulo.length < 3){
-                alertas.textContent = "O titulo precisa de no mínimo 3 caracteres"
+            } else if (titulo.length < 3) {
+                alertas.textContent = "O título precisa de no mínimo 3 caracteres"
                 return false
             } else if (tipo === "") {
                 alertas.textContent = "Selecione o tipo da mídia"
                 return false
-            } else if (genero === ""){
-                alertas.textContent = "Selecione o gênero da obra"     
-                return false   
-            } else if (anolancamento === ""){
+            } else if (genero === "") {
+                alertas.textContent = "Selecione o gênero da obra"
+                return false
+            } else if (anolancamento === "") {
                 alertas.textContent = "Insira o ano de lançamento da obra"
                 return false
             } else {
                 alertas.textContent = ""
                 return true
             }
-
         }
 
+        id += 1
 
-    id+=1
-    const dicionario = {
-        id: id,
-        titulo: titulo,
-        tipo: tipo,
-        genero: generos,
-        anolancamento: anolancamento,
-        elenco: elenco,
-        avaliacaogeral: avaliacaogeral,
-        status: infopessoal_status,
-        notapessoal: infopessoal_nota,
-        observacoes: infopessoal_observacoes
-    }
+        const dicionario = {
+            id: id,
+            titulo: titulo,
+            tipo: tipo,
+            genero: generos,
+            anolancamento: anolancamento,
+            elenco: elenco,
+            avaliacaogeral: avaliacaogeral,
+            status: infopessoal_status,
+            notapessoal: infopessoal_nota,
+            observacoes: infopessoal_observacoes
+        }
 
-    lista.push(dicionario)
-    localStorage.setItem("obras", JSON.stringify(lista))
-    corpocadastro.reset()
-    console.log(lista)
-
+        lista.push(dicionario)
+        localStorage.setItem("obras", JSON.stringify(lista))
+        corpocadastro.reset()
+        console.log(lista)
     })
-
 }
 
-function Read() {
+
+function Read(listaParaExibir = lista) {
     const corpopagconsulta = document.querySelector("#lista-obras")
-    if (corpopagconsulta === null) {return}
+
+    if (corpopagconsulta === null) {
+        return
+    }
+
     corpopagconsulta.innerHTML = ""
 
-    lista.forEach(function(i) {
+    listaParaExibir.forEach(function (i) {
         corpopagconsulta.innerHTML += `
         <article class="obra" data-id="${i.id}">
-            <section class = "apresentacao-obra">
+            <section class="apresentacao-obra">
                 <h3>${i.titulo}</h3>
             </section>
-        
 
             <section class="informacoes-obra">
                 <h3>Detalhes de ${i.titulo}</h3>
@@ -148,7 +153,7 @@ function Read() {
                 <p><strong>Nota Pessoal:</strong> ${i.notapessoal}</p>
                 <p><strong>Elenco:</strong> ${i.elenco}</p>
                 <p><strong>Observações:</strong> ${i.observacoes}</p>
-                
+
                 <section class="acoes-obra">
                     <button class="botao-editar" type="button" data-id="${i.id}">Editar</button>
                     <button class="botao-excluir" type="button" data-id="${i.id}">Excluir</button>
@@ -159,8 +164,8 @@ function Read() {
     })
 }
 
-function Update() {
 
+function Update() {
     const corpopagconsulta = document.querySelector("#lista-obras")
 
     if (corpopagconsulta !== null) {
@@ -175,72 +180,55 @@ function Update() {
     }
 
     function prepararEdicao() {
-        const corpocadastro =
-            document.querySelector("#corpo-cadastro")
+        const corpocadastro = document.querySelector("#corpo-cadastro")
 
         if (corpocadastro === null) {
             return
         }
 
-        const parametros =
-            new URLSearchParams(window.location.search)
-
-        const idEdicao =
-            Number(parametros.get("editar"))
+        const parametros = new URLSearchParams(window.location.search)
+        const idEdicao = Number(parametros.get("editar"))
 
         if (idEdicao === 0) {
             return
         }
 
-        const obraSelecionada =
-            lista.find(function (obra) {
-                return obra.id === idEdicao
-            })
+        const obraSelecionada = lista.find(function (obra) {
+            return obra.id === idEdicao
+        })
 
         if (obraSelecionada === undefined) {
             return
         }
 
-        const botaoSalvar =
-            document.querySelector("#botao-salvar")
-            
+        const botaoSalvar = document.querySelector("#botao-salvar")
+
         if (botaoSalvar !== null) {
             botaoSalvar.textContent = "Salvar alterações"
         }
 
-        document.querySelector("#input-titulo").value =
-            obraSelecionada.titulo
+        document.querySelector("#input-titulo").value = obraSelecionada.titulo
 
-        document.querySelector("#input-tipo-da-midia").value =
-            obraSelecionada.tipo
+        document.querySelector("#input-tipo-da-midia").value = obraSelecionada.tipo
 
-        document.querySelector("#input-genero").value =
-            obraSelecionada.genero
+        document.querySelector("#input-genero").value = obraSelecionada.genero
 
-        document.querySelector("#input-ano-lancamento").value =
-            obraSelecionada.anolancamento
+        document.querySelector("#input-ano-lancamento").value = obraSelecionada.anolancamento
 
-        document.querySelector("#input-elenco").value =
-            obraSelecionada.elenco
+        document.querySelector("#input-elenco").value = obraSelecionada.elenco
 
-        document.querySelector("#input-avaliacao-geral").value =
-            obraSelecionada.avaliacaogeral
+        document.querySelector("#input-avaliacao-geral").value = obraSelecionada.avaliacaogeral
 
-        document.querySelector("#input-infopessoal-status").value =
-            obraSelecionada.status
+        document.querySelector("#input-infopessoal-status").value = obraSelecionada.status
 
-        document.querySelector(
-            "#input-infopessoal-avaliacao-pessoal"
-        ).value = obraSelecionada.notapessoal
+        document.querySelector("#input-infopessoal-avaliacao-pessoal").value = obraSelecionada.notapessoal
 
-        document.querySelector(
-            "#input-infopessoal-observacoes"
-        ).value = obraSelecionada.observacoes
+        document.querySelector("#input-infopessoal-observacoes").value = obraSelecionada.observacoes
     }
 
     prepararEdicao()
-
 }
+
 
 function Delete() {
     const corpopagconsulta = document.querySelector("#lista-obras")
@@ -281,3 +269,115 @@ function Delete() {
     })
 }
 
+
+function Pesquisa() {
+    const formularioPesquisa = document.querySelector(".pesquisa form")
+
+    if (formularioPesquisa === null) {
+        return
+    }
+
+    formularioPesquisa.addEventListener("submit", function (event) {
+        event.preventDefault()
+        AplicarConsulta()
+    })
+}
+
+
+function Filtragem_Ordenacao() {
+    const formularioFiltros = document.querySelector(".filtros form")
+
+    if (formularioFiltros === null) {
+        return
+    }
+
+    formularioFiltros.addEventListener("submit", function (event) {
+        event.preventDefault()
+        AplicarConsulta()
+    })
+
+    formularioFiltros.addEventListener("reset", function () {
+        const campoPesquisa = document.querySelector("#pesquisa")
+
+        if (campoPesquisa !== null) {
+            campoPesquisa.value = ""
+        }
+
+        setTimeout(function () {
+            Read(lista)
+        }, 0)
+    })
+}
+
+
+function AplicarConsulta() {
+    const campoPesquisa = document.querySelector("#pesquisa")
+    const campoGenero = document.querySelector("#filtro-genero")
+    const campoTipo = document.querySelector("#filtro-tipo")
+    const campoStatus = document.querySelector("#filtro-status")
+    const campoOrdenacao = document.querySelector("#ordenacao")
+
+    if (
+        campoPesquisa === null ||
+        campoGenero === null ||
+        campoTipo === null ||
+        campoStatus === null ||
+        campoOrdenacao === null
+    ) {
+        return
+    }
+
+    const pesquisa = campoPesquisa.value.toLowerCase().trim()
+    const genero = campoGenero.value
+    const tipo = campoTipo.value
+    const status = campoStatus.value
+    const ordenacao = campoOrdenacao.value
+
+    const resultado = lista.filter(function (obra) {
+        const tituloCompativel = obra.titulo
+            .toLowerCase()
+            .includes(pesquisa)
+
+        const generoCompativel =
+            genero === "" || obra.genero === genero
+
+        const tipoCompativel =
+            tipo === "" || obra.tipo === tipo
+
+        const statusCompativel =
+            status === "" || obra.status === status
+
+        return (
+            tituloCompativel &&
+            generoCompativel &&
+            tipoCompativel &&
+            statusCompativel
+        )
+    })
+
+    if (ordenacao === "titulo") {
+        resultado.sort(function (obraA, obraB) {
+            return obraA.titulo.localeCompare(obraB.titulo)
+        })
+    }
+
+    if (ordenacao === "ano") {
+        resultado.sort(function (obraA, obraB) {
+            return (
+                Number(obraA.anolancamento) -
+                Number(obraB.anolancamento)
+            )
+        })
+    }
+
+    if (ordenacao === "avaliacao") {
+        resultado.sort(function (obraA, obraB) {
+            return (
+                Number(obraB.avaliacaogeral) -
+                Number(obraA.avaliacaogeral)
+            )
+        })
+    }
+
+    Read(resultado)
+}
