@@ -141,6 +141,7 @@ function Create() {
         localStorage.setItem("obras", JSON.stringify(lista))
         corpocadastro.reset()
         alertas.textContent = "Obra cadastrada com sucesso!"
+        alertas.classList.add("sucesso")
         console.log(lista)
     })
 }
@@ -602,6 +603,7 @@ function AutocompletarAPI() {
                     }
 
                     alertas.textContent = "Campos preenchidos pela API!"
+                    alertas.classList.add("sucesso")
                 })
 
                 containerSugestoes.appendChild(opcao)
