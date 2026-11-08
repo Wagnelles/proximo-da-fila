@@ -318,6 +318,11 @@
     }
 }
 
+.alertas.sucesso {
+    border-color: #22c55e;
+    color: #86efac;
+}
+
 
 @media (max-width: 450px) {
     .conteudo {

@@ -122,6 +122,7 @@ function Create() {
         lista.push(dicionario)
         localStorage.setItem("obras", JSON.stringify(lista))
         corpocadastro.reset()
+        alertas.textContent = "Obra cadastrada com sucesso!"
         console.log(lista)
     })
 }
