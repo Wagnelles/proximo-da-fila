@@ -184,7 +184,7 @@
 }
 
 
-/* Estado hover, focus e em clique */
+/* Estado hover */
 
 .formulario-cadastro button:hover {
     border: 2px solid #ffffff;
@@ -195,12 +195,18 @@
     box-shadow: 0 5px 15px #020617;
 }
 
+
+/* Estado focus */
+
 .formulario-cadastro button:focus {
     border: 3px solid #06b6d4;
 
     background-color: #334155;
     color: #ffffff;
 }
+
+
+/* Estado durante o clique */
 
 .formulario-cadastro button:active {
     border-color: #ffffff;
@@ -234,7 +240,17 @@
 }
 
 
-/* Esconde visualmente a caixa quando não há mensagem */
+/* Mensagem de sucesso */
+
+.alertas.sucesso {
+    border-color: #22c55e;
+
+    background-color: #334155;
+    color: #86efac;
+}
+
+
+/* Esconde a caixa quando não há mensagem */
 
 .alertas:empty {
     padding: 0;
@@ -318,11 +334,8 @@
     }
 }
 
-.alertas.sucesso {
-    border-color: #22c55e;
-    color: #86efac;
-}
 
+/* Telas menores */
 
 @media (max-width: 450px) {
     .conteudo {
