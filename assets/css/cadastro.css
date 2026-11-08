@@ -298,7 +298,7 @@
 }
 
 
-/* Aviso do validador */
+/* Aviso do validador (Erros por padrão) */
 
 .alertas {
     width: 100%;
@@ -322,11 +322,10 @@
 }
 
 
-/* Mensagem de sucesso */
+/* Mensagem de sucesso corrigida */
 
 .alertas.sucesso {
-    border-color: #22c55e;
-
+    border: 1px solid #22c55e;
     background-color: #334155;
     color: #86efac;
 }
@@ -446,3 +445,4 @@
         margin: 15px 0;
     }
 }
+```[cite: 7]
