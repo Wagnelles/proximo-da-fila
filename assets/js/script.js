@@ -1,10 +1,16 @@
 const lista = JSON.parse(localStorage.getItem("obras")) || []
-let id = lista.length
+let id = 0
+
+lista.forEach(function (obra) {
+    if (obra.id > id) {
+        id = obra.id
+    }
+})
 
 Create()
 Read()
-//Update() - ainda a fazer
-//Delete() - ainda a fazer
+Update()
+Delete()
 
 function Create() {
     const corpocadastro = document.querySelector("#corpo-cadastro")
@@ -38,6 +44,38 @@ function Create() {
     if (dadosvalidos === false){
         return
     }
+
+    //dependência de edição
+
+    const parametros = new URLSearchParams(window.location.search)
+    const idEdicao = Number(parametros.get("editar"))
+
+    if (idEdicao > 0) {
+        const obraSelecionada = lista.find(function (obra) {
+        return obra.id === idEdicao
+    })
+
+    if (obraSelecionada !== undefined) {
+        obraSelecionada.titulo = titulo
+        obraSelecionada.tipo = tipo
+        obraSelecionada.genero = generos
+        obraSelecionada.anolancamento = anolancamento
+        obraSelecionada.elenco = elenco
+        obraSelecionada.avaliacaogeral = avaliacaogeral
+        obraSelecionada.status = infopessoal_status
+        obraSelecionada.notapessoal = infopessoal_nota
+        obraSelecionada.observacoes = infopessoal_observacoes
+
+        localStorage.setItem(
+            "obras",
+            JSON.stringify(lista)
+        )
+
+        window.location.href = "consulta.html"
+
+        return
+    }
+}
 
     //função validador
         function validador(titulo, tipo, genero, anolancamento, alertas) {
@@ -121,6 +159,125 @@ function Read() {
     })
 }
 
-//function Update() - ainda a fazer
-//function Delete() - ainda a fazer
+function Update() {
+
+    const corpopagconsulta = document.querySelector("#lista-obras")
+
+    if (corpopagconsulta !== null) {
+        corpopagconsulta.addEventListener("click", function (event) {
+            if (event.target.classList.contains("botao-editar")) {
+                const idSelecionado = event.target.dataset.id
+
+                window.location.href =
+                    "cadastro.html?editar=" + idSelecionado
+            }
+        })
+    }
+
+    function prepararEdicao() {
+        const corpocadastro =
+            document.querySelector("#corpo-cadastro")
+
+        if (corpocadastro === null) {
+            return
+        }
+
+        const parametros =
+            new URLSearchParams(window.location.search)
+
+        const idEdicao =
+            Number(parametros.get("editar"))
+
+        if (idEdicao === 0) {
+            return
+        }
+
+        const obraSelecionada =
+            lista.find(function (obra) {
+                return obra.id === idEdicao
+            })
+
+        if (obraSelecionada === undefined) {
+            return
+        }
+
+        const botaoSalvar =
+            document.querySelector("#botao-salvar")
+            
+        if (botaoSalvar !== null) {
+            botaoSalvar.textContent = "Salvar alterações"
+        }
+
+        document.querySelector("#input-titulo").value =
+            obraSelecionada.titulo
+
+        document.querySelector("#input-tipo-da-midia").value =
+            obraSelecionada.tipo
+
+        document.querySelector("#input-genero").value =
+            obraSelecionada.genero
+
+        document.querySelector("#input-ano-lancamento").value =
+            obraSelecionada.anolancamento
+
+        document.querySelector("#input-elenco").value =
+            obraSelecionada.elenco
+
+        document.querySelector("#input-avaliacao-geral").value =
+            obraSelecionada.avaliacaogeral
+
+        document.querySelector("#input-infopessoal-status").value =
+            obraSelecionada.status
+
+        document.querySelector(
+            "#input-infopessoal-avaliacao-pessoal"
+        ).value = obraSelecionada.notapessoal
+
+        document.querySelector(
+            "#input-infopessoal-observacoes"
+        ).value = obraSelecionada.observacoes
+    }
+
+    prepararEdicao()
+
+}
+
+function Delete() {
+    const corpopagconsulta = document.querySelector("#lista-obras")
+
+    if (corpopagconsulta === null) {
+        return
+    }
+
+    corpopagconsulta.addEventListener("click", function (event) {
+        if (event.target.classList.contains("botao-excluir")) {
+            const idSelecionado = Number(event.target.dataset.id)
+
+            const posicaoObra = lista.findIndex(function (obra) {
+                return obra.id === idSelecionado
+            })
+
+            if (posicaoObra === -1) {
+                return
+            }
+
+            const confirmarExclusao = confirm(
+                "Deseja realmente excluir esta obra?"
+            )
+
+            if (confirmarExclusao === false) {
+                return
+            }
+
+            lista.splice(posicaoObra, 1)
+
+            localStorage.setItem(
+                "obras",
+                JSON.stringify(lista)
+            )
+
+            Read()
+        }
+    })
+}
 
