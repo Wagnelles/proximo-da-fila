@@ -58,7 +58,11 @@
                             type="text"
                             name="titulo"
                         >
+
+                        <button type="button" id="botao-buscar-api">Buscar na API</button>
                     </p>
+
+                    <div id="sugestoes-api"></div>
 
                     <p>
                         <label for="input-tipo-da-midia">Tipo:</label>
@@ -132,15 +136,17 @@
                     </p>
 
                     <p>
-                        <label for="input-imagem">Imagem:</label>
+                        <label for="input-imagem">Imagem (URL da capa):</label>
 
                         <input
-                            type="file"
+                            type="url"
                             id="input-imagem"
                             name="imagem"
-                            accept="image/png, image/jpeg"
+                            placeholder="Preenchido pela busca ou cole o link da imagem"
                         >
                     </p>
+
+                    <img id="preview-capa" src="" alt="Prévia da capa" hidden>
                 </fieldset>
 
                 <fieldset>

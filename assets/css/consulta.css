@@ -236,6 +236,18 @@
     align-items: start;
 }
 
+#lista-obras {
+    width: 100%;
+    min-width: 0;
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+
+    gap: 25px;
+}
+
 
 /* Obras */
 
@@ -297,6 +309,9 @@
     width: 100%;
     max-width: 340px;
     min-width: 0;
+
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
 
     border: 1px solid #a78bfa;
     border-radius: 12px;

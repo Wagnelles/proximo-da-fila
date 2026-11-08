@@ -13,9 +13,10 @@ Read()
 Update()
 Delete()
 
-// Funções de pesquisa, filtragem e ordenação
+// Funções de pesquisa, filtragem, ordenação e API
 Pesquisa()
 Filtragem_Ordenacao()
+AutocompletarAPI()
 
 
 function Create() {
@@ -24,6 +25,20 @@ function Create() {
     if (corpocadastro === null) {
         return
     }
+
+    corpocadastro.addEventListener("reset", function () {
+        const previewCapa = document.querySelector("#preview-capa")
+        const sugestoesApi = document.querySelector("#sugestoes-api")
+
+        if (previewCapa !== null) {
+            previewCapa.src = ""
+            previewCapa.hidden = true
+        }
+
+        if (sugestoesApi !== null) {
+            sugestoesApi.innerHTML = ""
+        }
+    })
 
     corpocadastro.addEventListener("submit", function (event) {
         event.preventDefault()
@@ -35,6 +50,7 @@ function Create() {
         const anolancamento = document.querySelector("#input-ano-lancamento").value
         const elenco = document.querySelector("#input-elenco").value
         const avaliacaogeral = document.querySelector("#input-avaliacao-geral").value
+        const imagem = document.querySelector("#input-imagem").value
         const infopessoal_status = document.querySelector("#input-infopessoal-status").value
         const infopessoal_nota = document.querySelector("#input-infopessoal-avaliacao-pessoal").value
         const infopessoal_observacoes = document.querySelector("#input-infopessoal-observacoes").value
@@ -68,6 +84,7 @@ function Create() {
                 obraSelecionada.anolancamento = anolancamento
                 obraSelecionada.elenco = elenco
                 obraSelecionada.avaliacaogeral = avaliacaogeral
+                obraSelecionada.imagem = imagem
                 obraSelecionada.status = infopessoal_status
                 obraSelecionada.notapessoal = infopessoal_nota
                 obraSelecionada.observacoes = infopessoal_observacoes
@@ -114,6 +131,7 @@ function Create() {
             anolancamento: anolancamento,
             elenco: elenco,
             avaliacaogeral: avaliacaogeral,
+            imagem: imagem,
             status: infopessoal_status,
             notapessoal: infopessoal_nota,
             observacoes: infopessoal_observacoes
@@ -138,10 +156,15 @@ function Read(listaParaExibir = lista) {
     corpopagconsulta.innerHTML = ""
 
     listaParaExibir.forEach(function (i) {
+        const imagemCapa = i.imagem
+            ? `<img class="capa-obra" src="${i.imagem}" alt="Capa de ${i.titulo}">`
+            : ""
+
         corpopagconsulta.innerHTML += `
         <article class="obra" data-id="${i.id}">
             <section class="apresentacao-obra">
                 <h3>${i.titulo}</h3>
+                ${imagemCapa}
             </section>
 
             <section class="informacoes-obra">
@@ -220,11 +243,19 @@ function Update() {
 
         document.querySelector("#input-avaliacao-geral").value = obraSelecionada.avaliacaogeral
 
+        document.querySelector("#input-imagem").value = obraSelecionada.imagem || ""
+
         document.querySelector("#input-infopessoal-status").value = obraSelecionada.status
 
         document.querySelector("#input-infopessoal-avaliacao-pessoal").value = obraSelecionada.notapessoal
 
         document.querySelector("#input-infopessoal-observacoes").value = obraSelecionada.observacoes
+
+        const previewCapa = document.querySelector("#preview-capa")
+        if (previewCapa !== null && obraSelecionada.imagem) {
+            previewCapa.src = obraSelecionada.imagem
+            previewCapa.hidden = false
+        }
     }
 
     prepararEdicao()
@@ -381,4 +412,159 @@ function AplicarConsulta() {
     }
 
     Read(resultado)
+}
+
+
+function AutocompletarAPI() {
+    const botaoBuscar = document.querySelector("#botao-buscar-api")
+    const inputTitulo = document.querySelector("#input-titulo")
+    const inputImagem = document.querySelector("#input-imagem")
+    const previewCapa = document.querySelector("#preview-capa")
+    const containerSugestoes = document.querySelector("#sugestoes-api")
+    const alertas = document.querySelector("#alertas")
+
+    if (botaoBuscar === null || inputTitulo === null || containerSugestoes === null) {
+        return
+    }
+
+    if (inputImagem !== null && previewCapa !== null) {
+        inputImagem.addEventListener("input", function () {
+            const url = inputImagem.value.trim()
+            if (url !== "") {
+                previewCapa.src = url
+                previewCapa.hidden = false
+            } else {
+                previewCapa.src = ""
+                previewCapa.hidden = true
+            }
+        })
+    }
+
+    botaoBuscar.addEventListener("click", async function () {
+        const termo = inputTitulo.value.trim()
+
+        if (termo.length < 2) {
+            alertas.textContent = "Digite pelo menos 2 caracteres no título para buscar"
+            return
+        }
+
+        alertas.textContent = "Buscando na API..."
+        containerSugestoes.innerHTML = ""
+
+        try {
+            const resposta = await fetch(
+                "https://imdb.iamidiotareyoutoo.com/search?q=" + encodeURIComponent(termo)
+            )
+            const dados = await resposta.json()
+
+            if (!dados.description || dados.description.length === 0) {
+                alertas.textContent = "Nenhuma obra encontrada"
+                return
+            }
+
+            alertas.textContent = "Selecione uma obra da lista abaixo:"
+
+            dados.description.slice(0, 5).forEach(function (item) {
+                const opcao = document.createElement("div")
+                opcao.className = "item-sugestao"
+
+                const posterOriginal = item["#IMG_POSTER"] || ""
+                const posterPadronizado = posterOriginal
+                    ? "https://wsrv.nl/?url=" + encodeURIComponent(posterOriginal) + "&w=300&h=450&fit=cover"
+                    : ""
+                const miniatura = posterOriginal
+                    ? "https://wsrv.nl/?url=" + encodeURIComponent(posterOriginal) + "&w=60&h=90&fit=cover"
+                    : ""
+
+                opcao.innerHTML = `
+                    ${miniatura ? `<img src="${miniatura}" alt="Capa">` : ""}
+                    <span>
+                        <strong>${item["#TITLE"] || ""}</strong> (${item["#YEAR"] || "S/A"}) - ${item["#ACTORS"] || ""}
+                    </span>
+                    <button type="button">Selecionar</button>
+                `
+
+                opcao.addEventListener("click", async function () {
+                    document.querySelector("#input-titulo").value = item["#TITLE"] || ""
+                    document.querySelector("#input-ano-lancamento").value = item["#YEAR"] || ""
+                    document.querySelector("#input-elenco").value = item["#ACTORS"] || ""
+                    document.querySelector("#input-imagem").value = posterPadronizado
+
+                    if (previewCapa !== null) {
+                        if (posterPadronizado !== "") {
+                            previewCapa.src = posterPadronizado
+                            previewCapa.hidden = false
+                        } else {
+                            previewCapa.src = ""
+                            previewCapa.hidden = true
+                        }
+                    }
+
+                    containerSugestoes.innerHTML = ""
+                    alertas.textContent = "Carregando tipo, gênero e nota..."
+
+                    const imdbId = item["#IMDB_ID"]
+                    if (imdbId) {
+                        try {
+                            const respDetalhes = await fetch(
+                                "https://imdb.iamidiotareyoutoo.com/search?tt=" + imdbId
+                            )
+                            const detalhes = await respDetalhes.json()
+                            const info = detalhes.short || {}
+
+                            if (info.aggregateRating && info.aggregateRating.ratingValue) {
+                                document.querySelector("#input-avaliacao-geral").value =
+                                    info.aggregateRating.ratingValue
+                            }
+
+                            const mapaTipo = {
+                                Movie: "filme",
+                                TVSeries: "serie",
+                                TVMiniSeries: "serie",
+                                Short: "curta-metragem"
+                            }
+
+                            if (info["@type"] && mapaTipo[info["@type"]]) {
+                                document.querySelector("#input-tipo-da-midia").value =
+                                    mapaTipo[info["@type"]]
+                            }
+
+                            const mapaGenero = {
+                                Action: "acao",
+                                Animation: "animacao",
+                                Adventure: "aventura",
+                                Comedy: "comedia",
+                                Documentary: "documentario",
+                                Drama: "drama",
+                                "Sci-Fi": "ficcao-cientifica",
+                                Romance: "romance",
+                                Thriller: "suspense",
+                                Mystery: "suspense",
+                                Horror: "terror"
+                            }
+
+                            if (Array.isArray(info.genre)) {
+                                for (let i = 0; i < info.genre.length; i++) {
+                                    const g = info.genre[i]
+                                    if (mapaGenero[g]) {
+                                        document.querySelector("#input-genero").value = mapaGenero[g]
+                                        break
+                                    }
+                                }
+                            }
+                        } catch (erroDetalhe) {
+                            console.error(erroDetalhe)
+                        }
+                    }
+
+                    alertas.textContent = "Campos preenchidos pela API!"
+                })
+
+                containerSugestoes.appendChild(opcao)
+            })
+        } catch (erro) {
+            console.error(erro)
+            alertas.textContent = "Erro ao buscar dados na API"
+        }
+    })
 }
