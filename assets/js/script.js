@@ -416,9 +416,8 @@ function AplicarConsulta() {
 
 
 function AutocompletarAPI() {
-    // Opcional: Se criar uma chave gratuita no TMDB, cole aqui dentro das aspas.
-    // Se deixar vazio (""), o código usa automaticamente a CDN do IMDb + TVMaze sem precisar de chave!
-    const CHAVE_TMDB = ""
+    // Cole sua Chave da API (32 caracteres) abaixo. O .trim() remove espaços acidentais.
+    const CHAVE_TMDB = "1851cb764ef4d4cf026d939f7261574b".trim()
 
     const botaoBuscar = document.querySelector("#botao-buscar-api")
     const inputTitulo = document.querySelector("#input-titulo")
@@ -444,136 +443,21 @@ function AutocompletarAPI() {
         })
     }
 
-    // Mapeamento de gêneros para os values exatos do seu <select id="input-genero">
-    const mapaGenero = {
-        Action: "acao",
-        "Ação": "acao",
-        Animation: "animacao",
-        "Animação": "animacao",
-        Anime: "animacao",
-        Adventure: "aventura",
-        Aventura: "aventura",
-        Comedy: "comedia",
-        "Comédia": "comedia",
-        Documentary: "documentario",
-        "Documentário": "documentario",
-        Drama: "drama",
-        "Science-Fiction": "ficcao-cientifica",
-        "Sci-Fi": "ficcao-cientifica",
-        "Ficção científica": "ficcao-cientifica",
-        Romance: "romance",
-        Thriller: "suspense",
-        Mystery: "suspense",
-        Suspense: "suspense",
-        Crime: "suspense",
-        Horror: "terror",
-        Terror: "terror"
-    }
-
-    // Busca sem precisar de API Key (CDN Oficial do IMDb + TVMaze para detalhes)
-    async function buscarSemChave(termo) {
-        const letra = termo.toLowerCase().replace(/[^a-z0-9]/g, "")[0] || "a"
-        const urlImdbCdn = `https://v3.sg.media-imdb.com/suggestion/${letra}/${encodeURIComponent(termo)}.json`
-
-        const rotas = [
-            urlImdbCdn,
-            "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(urlImdbCdn),
-            "https://api.allorigins.win/raw?url=" + encodeURIComponent(urlImdbCdn)
-        ]
-
-        let dadosImdb = null
-        for (let i = 0; i < rotas.length; i++) {
-            try {
-                const r = await fetch(rotas[i])
-                if (r.ok) {
-                    dadosImdb = await r.json()
-                    if (dadosImdb && Array.isArray(dadosImdb.d)) break
-                }
-            } catch (e) {}
-        }
-
-        if (!dadosImdb || !Array.isArray(dadosImdb.d)) {
-            throw new Error("Não foi possível acessar a busca")
-        }
-
-        // Filtra apenas títulos de obras (ignora páginas de atores/empresas)
-        return dadosImdb.d
-            .filter(function (item) {
-                return item.id && item.id.startsWith("tt")
-            })
-            .slice(0, 5)
-            .map(function (item) {
-                const imgOriginal = item.i ? item.i.imageUrl : ""
-                let tipoMidia = "filme"
-                if (item.qid === "tvSeries" || item.qid === "tvMiniSeries") {
-                    tipoMidia = "serie"
-                } else if (item.qid === "short") {
-                    tipoMidia = "curta-metragem"
-                }
-
-                return {
-                    imdbId: item.id,
-                    titulo: item.l || "",
-                    ano: item.y || "",
-                    elenco: item.s || "",
-                    tipo: tipoMidia,
-                    capa: imgOriginal
-                        ? "https://wsrv.nl/?url=" + encodeURIComponent(imgOriginal) + "&w=300&h=450&fit=cover"
-                        : "",
-                    miniatura: imgOriginal
-                        ? "https://wsrv.nl/?url=" + encodeURIComponent(imgOriginal) + "&w=60&h=90&fit=cover"
-                        : "",
-                    genero: "",
-                    nota: ""
-                }
-            })
-    }
-
-    // Busca via TMDB (caso você preencha a constante CHAVE_TMDB acima)
-    async function buscarViaTMDB(termo) {
-        const resp = await fetch(
-            `https://api.themoviedb.org/3/search/multi?api_key=${CHAVE_TMDB}&language=pt-BR&query=${encodeURIComponent(termo)}`
-        )
-        const dados = await resp.json()
-        if (!dados.results) return []
-
-        const mapaGeneroTMDB = {
-            28: "acao", 10759: "acao", 16: "animacao", 12: "aventura",
-            35: "comedia", 99: "documentario", 18: "drama", 878: "ficcao-cientifica",
-            10765: "ficcao-cientifica", 10749: "romance", 53: "suspense",
-            9648: "suspense", 27: "terror"
-        }
-
-        return dados.results
-            .filter(function (i) {
-                return i.media_type === "movie" || i.media_type === "tv"
-            })
-            .slice(0, 5)
-            .map(function (item) {
-                const data = item.release_date || item.first_air_date || ""
-                let generoMapeado = ""
-                if (Array.isArray(item.genre_ids)) {
-                    for (let g of item.genre_ids) {
-                        if (mapaGeneroTMDB[g]) {
-                            generoMapeado = mapaGeneroTMDB[g]
-                            break
-                        }
-                    }
-                }
-
-                return {
-                    tmdbId: item.id,
-                    mediaType: item.media_type,
-                    titulo: item.title || item.name || "",
-                    ano: data ? data.slice(0, 4) : "",
-                    elenco: "",
-                    tipo: item.media_type === "tv" ? "serie" : "filme",
-                    capa: item.poster_path ? "https://image.tmdb.org/t/p/w300" + item.poster_path : "",
-                    miniatura: item.poster_path ? "https://image.tmdb.org/t/p/w92" + item.poster_path : "",
-                    genero: generoMapeado,
-                    nota: item.vote_average ? Number(item.vote_average).toFixed(1) : ""
-                }
-            })
+    const mapaGeneroTMDB = {
+        28: "acao",
+        10759: "acao",
+        16: "animacao",
+        12: "aventura",
+        35: "comedia",
+        99: "documentario",
+        18: "drama",
+        878: "ficcao-cientifica",
+        10765: "ficcao-cientifica",
+        10749: "romance",
+        53: "suspense",
+        9648: "suspense",
+        80: "suspense",
+        27: "terror"
     }
 
     botaoBuscar.addEventListener("click", async function () {
@@ -584,51 +468,110 @@ function AutocompletarAPI() {
             return
         }
 
-        alertas.textContent = "Buscando na API..."
+        alertas.textContent = "Buscando no TMDB..."
         containerSugestoes.innerHTML = ""
 
         try {
-            const resultados = CHAVE_TMDB !== "1851cb764ef4d4cf026d939f7261574b"
-                ? await buscarViaTMDB(termo)
-                : await buscarSemChave(termo)
+            // Se o usuário colou o Token de Leitura (começa com eyJ) ou a Chave de 32 caracteres, aceita ambos!
+            const usaTokenBearer = CHAVE_TMDB.startsWith("eyJ")
+            const paramKey = usaTokenBearer ? "" : `api_key=${encodeURIComponent(CHAVE_TMDB)}&`
+            const opcoesFetch = usaTokenBearer
+                ? { headers: { Authorization: `Bearer ${CHAVE_TMDB}`, accept: "application/json" } }
+                : {}
 
-            if (resultados.length === 0) {
+            // Busca Filmes e Séries separadamente para não misturar com perfis de atores
+            const [respFilmes, respSeries] = await Promise.all([
+                fetch(
+                    `https://api.themoviedb.org/3/search/movie?${paramKey}language=pt-BR&query=${encodeURIComponent(termo)}`,
+                    opcoesFetch
+                ),
+                fetch(
+                    `https://api.themoviedb.org/3/search/tv?${paramKey}language=pt-BR&query=${encodeURIComponent(termo)}`,
+                    opcoesFetch
+                )
+            ])
+
+            const dadosFilmes = await respFilmes.json()
+            const dadosSeries = await respSeries.json()
+
+            // Se a chave do TMDB estiver incorreta ou inativa, mostra o erro oficial do TMDB na tela
+            if (!respFilmes.ok) {
+                alertas.textContent = "Erro TMDB: " + (dadosFilmes.status_message || respFilmes.status)
+                return
+            }
+
+            const listaFilmes = (dadosFilmes.results || []).map(function (f) {
+                f.media_type = "movie"
+                return f
+            })
+            const listaSeries = (dadosSeries.results || []).map(function (s) {
+                s.media_type = "tv"
+                return s
+            })
+
+            // Junta filmes e séries e ordena pelos mais populares primeiro
+            const combinados = listaFilmes
+                .concat(listaSeries)
+                .sort(function (a, b) {
+                    return (b.popularity || 0) - (a.popularity || 0)
+                })
+                .slice(0, 5)
+
+            if (combinados.length === 0) {
                 alertas.textContent = "Nenhuma obra encontrada"
                 return
             }
 
             alertas.textContent = "Selecione uma obra da lista abaixo:"
 
-            resultados.forEach(function (obra) {
+            combinados.forEach(function (item) {
+                const titulo = item.title || item.name || ""
+                const data = item.release_date || item.first_air_date || ""
+                const ano = data ? data.slice(0, 4) : ""
+                const tipo = item.media_type === "tv" ? "serie" : "filme"
+                const tipoLegivel = item.media_type === "tv" ? "Série" : "Filme"
+                const capa = item.poster_path ? "https://image.tmdb.org/t/p/w300" + item.poster_path : ""
+                const miniatura = item.poster_path ? "https://image.tmdb.org/t/p/w92" + item.poster_path : ""
+                const nota = item.vote_average ? Number(item.vote_average).toFixed(1) : ""
+
+                let genero = ""
+                if (Array.isArray(item.genre_ids)) {
+                    for (let i = 0; i < item.genre_ids.length; i++) {
+                        const idGen = item.genre_ids[i]
+                        if (mapaGeneroTMDB[idGen]) {
+                            genero = mapaGeneroTMDB[idGen]
+                            break
+                        }
+                    }
+                }
+
                 const opcao = document.createElement("div")
                 opcao.className = "item-sugestao"
 
                 opcao.innerHTML = `
-                    ${obra.miniatura ? `<img src="${obra.miniatura}" alt="Capa">` : ""}
+                    ${miniatura ? `<img src="${miniatura}" alt="Capa">` : ""}
                     <span>
-                        <strong>${obra.titulo}</strong> (${obra.ano || "S/A"})
-                        ${obra.elenco ? " - " + obra.elenco : ""}
+                        <strong>${titulo}</strong> (${ano || "S/A"}) - ${tipoLegivel}
                     </span>
                     <button type="button">Selecionar</button>
                 `
 
                 opcao.addEventListener("click", async function () {
-                    document.querySelector("#input-titulo").value = obra.titulo
-                    document.querySelector("#input-ano-lancamento").value = obra.ano
-                    document.querySelector("#input-tipo-da-midia").value = obra.tipo
-                    document.querySelector("#input-elenco").value = obra.elenco
-                    document.querySelector("#input-imagem").value = obra.capa
+                    document.querySelector("#input-titulo").value = titulo
+                    document.querySelector("#input-ano-lancamento").value = ano
+                    document.querySelector("#input-tipo-da-midia").value = tipo
+                    document.querySelector("#input-imagem").value = capa
 
-                    if (obra.genero) {
-                        document.querySelector("#input-genero").value = obra.genero
+                    if (genero !== "") {
+                        document.querySelector("#input-genero").value = genero
                     }
-                    if (obra.nota) {
-                        document.querySelector("#input-avaliacao-geral").value = obra.nota
+                    if (nota !== "") {
+                        document.querySelector("#input-avaliacao-geral").value = nota
                     }
 
                     if (previewCapa !== null) {
-                        if (obra.capa !== "") {
-                            previewCapa.src = obra.capa
+                        if (capa !== "") {
+                            previewCapa.src = capa
                             previewCapa.hidden = false
                         } else {
                             previewCapa.src = ""
@@ -637,51 +580,25 @@ function AutocompletarAPI() {
                     }
 
                     containerSugestoes.innerHTML = ""
-                    alertas.textContent = "Buscando informações complementares..."
+                    alertas.textContent = "Carregando elenco principal..."
 
-                    // Se estiver usando TMDB, busca o elenco principal
-                    if (CHAVE_TMDB !== "" && obra.tmdbId) {
-                        try {
-                            const rCred = await fetch(
-                                `https://api.themoviedb.org/3/${obra.mediaType}/${obra.tmdbId}/credits?api_key=${CHAVE_TMDB}&language=pt-BR`
-                            )
-                            const cred = await rCred.json()
-                            if (cred && Array.isArray(cred.cast)) {
-                                document.querySelector("#input-elenco").value = cred.cast
-                                    .slice(0, 4)
-                                    .map(function (a) { return a.name })
-                                    .join(", ")
-                            }
-                        } catch (e) {}
-                    }
+                    try {
+                        const respCreditos = await fetch(
+                            `https://api.themoviedb.org/3/${item.media_type}/${item.id}/credits?${paramKey}language=pt-BR`,
+                            opcoesFetch
+                        )
+                        const dadosCreditos = await respCreditos.json()
 
-                    // Se estiver no modo sem chave, consulta TVMaze pelo IMDb ID ou título para tentar obter Nota e Gênero
-                    if (CHAVE_TMDB === "" && obra.imdbId) {
-                        try {
-                            let rMaze = await fetch(
-                                "https://api.tvmaze.com/lookup/shows?imdb=" + encodeURIComponent(obra.imdbId)
-                            )
-                            if (!rMaze.ok) {
-                                rMaze = await fetch(
-                                    "https://api.tvmaze.com/singlesearch/shows?q=" + encodeURIComponent(obra.titulo)
-                                )
-                            }
-                            if (rMaze.ok) {
-                                const infoMaze = await rMaze.json()
-                                if (infoMaze.rating && infoMaze.rating.average) {
-                                    document.querySelector("#input-avaliacao-geral").value = infoMaze.rating.average
-                                }
-                                if (Array.isArray(infoMaze.genres)) {
-                                    for (let i = 0; i < infoMaze.genres.length; i++) {
-                                        const g = infoMaze.genres[i]
-                                        if (mapaGenero[g]) {
-                                            document.querySelector("#input-genero").value = mapaGenero[g]
-                                            break
-                                        }
-                                    }
-                                }
-                            }
-                        } catch (e) {}
+                        if (dadosCreditos && Array.isArray(dadosCreditos.cast)) {
+                            document.querySelector("#input-elenco").value = dadosCreditos.cast
+                                .slice(0, 5)
+                                .map(function (ator) {
+                                    return ator.name
+                                })
+                                .join(", ")
+                        }
+                    } catch (erroElenco) {
+                        console.error(erroElenco)
                     }
 
                     alertas.textContent = "Campos preenchidos pela API!"
@@ -691,7 +608,7 @@ function AutocompletarAPI() {
             })
         } catch (erro) {
             console.error(erro)
-            alertas.textContent = "Erro ao buscar dados na API"
+            alertas.textContent = "Erro de conexão com o TMDB: " + erro.message
         }
     })
 }
