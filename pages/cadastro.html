@@ -58,14 +58,13 @@
                             type="text"
                             id="titulo"
                             name="titulo"
-                            required
                         >
                     </p>
 
                     <p>
                         <label for="tipo">Tipo:</label>
 
-                        <select id="input-tipo-da-midia" name="tipo" required>
+                        <select id="input-tipo-da-midia" name="tipo">
                             <option value="">Selecione um tipo</option>
                             <option value="filme">Filme</option>
                             <option value="serie">Série</option>
@@ -84,7 +83,6 @@
                             id="generos"
                             name="generos"
                             placeholder="Exemplo: ação, aventura, comédia"
-                            required
                         >
                     </p>
 
@@ -99,7 +97,6 @@
                             name="ano-lancamento"
                             min="1888"
                             max="2100"
-                            required
                         >
                     </p>
 
@@ -147,7 +144,7 @@
                     <p>
                         <label for="status">Status:</label>
 
-                        <select id="input-infopessoal-status" name="status" required>
+                        <select id="input-infopessoal-status" name="status">
                             <option value="">Selecione um status</option>
                             <option value="quero-assistir">
                                 Quero assistir
@@ -192,6 +189,8 @@
                     <button type="submit">Cadastrar obra</button>
                     <button type="reset">Limpar formulário</button>
                 </p>
+
+                <p class="alertas" id="alertas"></p>
 
             </form>
 

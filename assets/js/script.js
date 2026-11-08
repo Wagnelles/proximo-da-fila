@@ -25,6 +25,44 @@ function Create() {
     const infopessoal_status = document.querySelector("#input-infopessoal-status").value
     const infopessoal_nota = document.querySelector("#input-infopessoal-avaliacao-pessoal").value
     const infopessoal_observacoes = document.querySelector("#input-infopessoal-observacoes").value
+    const alertas = document.querySelector("#alertas")
+
+    const dadosvalidos = validador(
+        titulo,
+        tipo,
+        generos,
+        anolancamento,
+        alertas
+    )
+
+    if (dadosvalidos === false){
+        return
+    }
+
+    //função validador
+        function validador(titulo, tipo, genero, anolancamento, alertas) {
+            if (titulo === "") {
+                alertas.textContent = "Digite um título"
+                return false
+            } else if (titulo.length < 3){
+                alertas.textContent = "O titulo precisa de no mínimo 3 caracteres"
+                return false
+            } else if (tipo === "") {
+                alertas.textContent = "Selecione o tipo da mídia"
+                return false
+            } else if (genero === ""){
+                alertas.textContent = "Selecione o gênero da obra"     
+                return false   
+            } else if (anolancamento === ""){
+                alertas.textContent = "Insira o ano de lançamento da obra"
+                return false
+            } else {
+                alertas.textContent = ""
+                return true
+            }
+
+        }
+
 
     id+=1
     const dicionario = {
@@ -42,6 +80,7 @@ function Create() {
 
     lista.push(dicionario)
     localStorage.setItem("obras", JSON.stringify(lista))
+    corpocadastro.reset()
     console.log(lista)
 
     })
@@ -84,3 +123,4 @@ function Read() {
 
 //function Update() - ainda a fazer
 //function Delete() - ainda a fazer
+
